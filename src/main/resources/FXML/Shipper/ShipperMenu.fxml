@@ -17,24 +17,24 @@
    <AnchorPane prefHeight="813.0" prefWidth="200.0" styleClass="left_container">
       <VBox layoutY="24.0" prefHeight="157.0" prefWidth="200.0" styleClass="title_container">
          <ImageView fitHeight="67.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../Images/icons8-shipper-64.png"/>
+            <Image url="@../../Images/icons8-shipper-64.png" />
          </ImageView>
-         <Label prefHeight="69.0" prefWidth="180.0" text="Shipper Management"/>
+         <Label prefHeight="69.0" prefWidth="180.0" text="Shipper Management" />
       </VBox>
       <VBox alignment="TOP_CENTER" layoutY="198.0" prefHeight="343.0" prefWidth="200.0" styleClass="menu_container" AnchorPane.topAnchor="198.0">
          <Button fx:id="my_orders_btn" mnemonicParsing="false" text="My Orders">
             <graphic>
-               <FontAwesomeIconView glyphName="HOME" text="" />
+               <FontAwesomeIconView glyphName="HOME" size="20" text="" />
             </graphic>
          </Button>
-         <Button id="profile" fx:id="profile_btn" mnemonicParsing="false" styleClass="alt_btn" text="Profile">
+         <Button id="profile" fx:id="profile_btn" mnemonicParsing="false" text="Profile">
             <graphic>
-               <FontAwesomeIconView glyphName="USER" />
+               <FontAwesomeIconView glyphName="USER" size="20" text="" />
             </graphic>
          </Button>
          <Button fx:id="logout_btn" mnemonicParsing="false" styleClass="alt_btn" text="Logout">
             <graphic>
-               <FontAwesomeIconView glyphName="EXTERNAL_LINK" text="" />
+               <FontAwesomeIconView glyphName="EXTERNAL_LINK" size="20" text="" />
             </graphic>
          </Button>
       </VBox>
@@ -44,7 +44,7 @@
          <Button fx:id="report_btn" mnemonicParsing="false" text="Report">
             <graphic>
                <ImageView fitHeight="108.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../../Images/add-icon.png"/>
+                  <Image url="@../../Images/add-icon.png" />
                </ImageView>
             </graphic>
          </Button>
@@ -53,7 +53,4 @@
          <Insets bottom="10.0" left="10.0" right="10.0" />
       </VBox.margin>
    </AnchorPane>
-   <padding>
-      <Insets right="10.0" />
-   </padding>
 </VBox>

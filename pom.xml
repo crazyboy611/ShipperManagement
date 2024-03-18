@@ -69,7 +69,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>org.doannhom7.shippermanagement/org.doannhom7.shippermanagement.HelloApplication</mainClass>
+              <mainClass>org.doannhom7.shippermanagement/org.doannhom7.shippermanagement.Application</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>

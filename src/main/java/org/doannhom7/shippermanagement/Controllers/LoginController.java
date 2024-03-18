@@ -3,10 +3,12 @@ package org.doannhom7.shippermanagement.Controllers;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.doannhom7.shippermanagement.Models.AccountType;
 import org.doannhom7.shippermanagement.Models.Model;
 
 import java.net.URL;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -25,6 +27,7 @@ public class LoginController implements Initializable {
         acc_selector.valueProperty().addListener(observable -> {
             setAcc_selector();
         });
+        login_btn.setOnAction(actionEvent -> onLogin());
     }
 
     public ChoiceBox<AccountType> getAcc_selector() {
@@ -36,6 +39,34 @@ public class LoginController implements Initializable {
             shipper_phone.setText("Username: ");
         }else{
             shipper_phone.setText("Phone: ");
+        }
+    }
+    private void onLogin() {
+        Stage stage = (Stage) error_label.getScene().getWindow();
+//        Model.getInstance().getViewFactory().showClientWindow();
+        if (Model.getInstance().getViewFactory().getAccountType() == AccountType.SHIPPER) {
+            Model.getInstance().evaluateShipperCred(shipper_phone_field.getText(), password_field.getText());
+            if(Model.getInstance().getShipperLoginSuccessFlag()){
+                Model.getInstance().getViewFactory().showShipperWindow();
+                Model.getInstance().getViewFactory().closeStage(stage);
+            }else{
+                shipper_phone_field.setText("");
+                password_field.setText("");
+                error_label.setText("No Such Login Credentials");
+            }
+        }
+        else{
+            if(Model.getInstance().getViewFactory().getAccountType() == AccountType.ADMIN) {
+                Model.getInstance().evaluateAdminCred(shipper_phone_field.getText(), password_field.getText());
+                if(Model.getInstance().getAdminLoginSuccessFlag()) {
+                    Model.getInstance().getViewFactory().showAdminWindow();
+                    Model.getInstance().getViewFactory().closeStage(stage);
+                }else{
+                    shipper_phone_field.setText("");
+                    password_field.setText("");
+                    error_label.setText("No Such Login Credentials");
+                }
+            }
         }
     }
 }

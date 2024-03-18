@@ -1,6 +1,9 @@
 .my_orders_view_container {
     -fx-background-color: #EEEEEE;
 }
+.container {
+    -fx-background-color: #EEEEEE;
+}
 .title {
     -fx-font-size: 1.8em;
 }
