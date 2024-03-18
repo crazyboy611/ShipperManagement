@@ -1,0 +1,51 @@
+.menu_container {
+    -fx-background-color: #eeeeee;
+    /*-fx-background-radius: 10;*/
+    /*-fx-effect: dropshadow(three-pass-box, #AAAAAA, 5, 0, 5, 5);*/
+    -fx-padding: 10 10 10 10;
+}
+.menu_nav {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 5, 0, 5, 5);
+}
+.title_container {
+    -fx-alignment: top_center;
+    -fx-padding: 10;
+    -fx-background-color: #FFFFFF;
+    /*-fx-background-radius: 20 20 0 0;*/
+}
+
+.title_container Label {
+    -fx-fill: #000000;
+    -fx-font-size: 1.7em;
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+    /*-fx-font-weight: bold;*/
+}
+.menu_navigation {
+    -fx-alignment: top-center;
+    -fx-spacing: 20;
+}
+.menu_navigation Button {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(two-pass-box, #AAAAAA, 5, 0, 0, 5);
+    -fx-pref-width: 125;
+    -fx-pref-height: 40;
+    -fx-text-fill: #F7AD1DFF;
+    -fx-font-size: 1.3em;
+}
+.menu_navigation Button:hover {
+    -fx-cursor: hand;
+}
+.menu_navigation FontAwesomeIconView{
+    -fx-fill: #F7AD1DFF;
+
+}
+.menu_navigation .logout_btn {
+    -fx-background-color: #F7AD1DFF;
+    -fx-text-fill: white;
+}
+.menu_navigation .logout_btn FontAwesomeIconView{
+    -fx-fill: white;
+}

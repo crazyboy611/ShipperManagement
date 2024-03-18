@@ -1,0 +1,23 @@
+.my_profile_container {
+    -fx-background-color: #EEEEEE;
+}
+.container {
+    -fx-background-color: #EEEEEE;
+}
+.my_profile_info {
+    /*-fx-border-width: 1 1 1 1;*/
+    -fx-background-color: #FFFFFF;
+    /*-fx-border-color: black;?*/
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 5, 0, 0, 6);
+    -fx-background-radius: 10;
+    -fx-spacing: 20;
+    -fx-padding: 30;
+}
+.my_profile_info Text {
+    -fx-fill: #888888;
+}
+.my_profile_info Label {
+    -fx-fill: #888888;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+}

@@ -1,0 +1,30 @@
+.view_container {
+    -fx-background-color: #EEEEEE;
+}
+.info_view {
+    -fx-spacing: 15;
+    -fx-padding: 0 0 0 10;
+}
+.info_view TextField {
+    -fx-pref-height: 35;
+    -fx-pref-width: 250;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 5, 0, 0, 5);
+}
+.info_view DatePicker {
+    -fx-pref-height: 30;
+    -fx-pref-width: 250;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 5, 0, 0, 5);
+}
+.crud_nav {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+    -fx-alignment: center;
+    -fx-spacing: 15;
+}
+.crud_nav Button {
+    -fx-pref-width: 70;
+    -fx-pref-height: 70;
+}
+Button:hover {
+    -fx-cursor: hand;
+}
