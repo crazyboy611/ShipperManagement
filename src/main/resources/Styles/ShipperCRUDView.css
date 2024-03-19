@@ -11,7 +11,7 @@
     -fx-effect: dropshadow(three-pass-box, #AAAAAA, 5, 0, 0, 5);
 }
 .info_view DatePicker {
-    -fx-pref-height: 30;
+    -fx-pref-height: 35;
     -fx-pref-width: 250;
     -fx-effect: dropshadow(three-pass-box, #AAAAAA, 5, 0, 0, 5);
 }
@@ -20,10 +20,50 @@
     -fx-background-radius: 10;
     -fx-alignment: center;
     -fx-spacing: 15;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 5, 0, 0, 5);
 }
 .crud_nav Button {
-    -fx-pref-width: 70;
-    -fx-pref-height: 70;
+    -fx-pref-width: 80;
+    -fx-pref-height: 80 ;
+}
+.save_btn {
+    -fx-font-size: 1.5em;
+    -fx-text-fill: white;
+    -fx-background-color: #5BBD2BFF;
+}
+.edit_btn{
+    -fx-font-size: 1.5em;
+    -fx-text-fill: white;
+    -fx-background-color: #F1AF00FF;
+}
+.delete_btn {
+    -fx-font-size: 1.5em;
+    -fx-text-fill: white;
+    -fx-background-color: red;
+}
+.image_view {
+    -fx-border-color: red;
+    -fx-border-radius: 8;
+    -fx-border-width: 2;
+    -fx-background-color: #ffffff;
+    -fx-alignment: center;
+    -fx-padding: 5 5 5 5 ;
+    -fx-spacing: 10;
+}
+.clear_btn {
+    -fx-background-color: red;
+    -fx-pref-height: 30;
+    -fx-pref-width: 30;
+}
+.clear_btn FontAwesomeIconView{
+    -fx-fill: white;
+}
+.upload_btn {
+    -fx-background-color: #3399CCFF;
+    -fx-text-fill: white;
+}
+.upload_btn FontAwesomeIconView{
+    -fx-fill: white;
 }
 Button:hover {
     -fx-cursor: hand;

@@ -12,17 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="677.0" styleClass="login_container"
-            stylesheets="@../Styles/login.css"
-            xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.doannhom7.shippermanagement.Controllers.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="677.0" styleClass="login_container" stylesheets="@../Styles/login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.LoginController">
     <VBox prefHeight="400.0" prefWidth="200.0" styleClass="login_logo_container">
-      <ImageView fitHeight="93.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
-         <image>
+        <ImageView fitHeight="93.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../Images/icons8-shipper-64.png" />
-         </image>
-      </ImageView>
+        </ImageView>
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Shipper Management">
          <VBox.margin>
             <Insets left="10.0" right="10.0" />
@@ -31,7 +25,7 @@
     <VBox layoutX="222.0" layoutY="25.0" prefHeight="350.0" prefWidth="350.0" styleClass="login_form_container" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
         <Label id="choice-prompt_text" prefHeight="17.0" prefWidth="208.0" text="Choose Your Account Type: " />
         <ChoiceBox fx:id="acc_selector" prefWidth="150.0" styleClass="account_selector" />
-        <Label fx:id="shipper_phone" text="Phone: " />
+        <Label fx:id="shipper_phone" text="Username:" />
         <TextField fx:id="shipper_phone_field" styleClass="input_field" />
         <Label text="Password:" />
         <PasswordField fx:id="password_field" styleClass="input_field" />

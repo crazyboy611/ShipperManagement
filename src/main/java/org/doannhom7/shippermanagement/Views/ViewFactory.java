@@ -26,7 +26,7 @@ public class ViewFactory {
 
 
     public ViewFactory(){
-        this.accountType = AccountType.SHIPPER;
+        this.accountType = AccountType.ADMIN;
         this.shipperSelectedMenu = new SimpleObjectProperty<>();
         this.adminSelectedMenu = new SimpleObjectProperty<>();
     }

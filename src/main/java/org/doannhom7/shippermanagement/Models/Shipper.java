@@ -1,7 +1,10 @@
 package org.doannhom7.shippermanagement.Models;
 
 import javafx.beans.property.*;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 
+import java.sql.Blob;
 import java.time.LocalDate;
 
 public class Shipper {
@@ -12,6 +15,7 @@ public class Shipper {
     private StringProperty phone;
     private StringProperty email;
     private StringProperty address;
+    private StringProperty password;
     public Shipper(){}
     public Shipper(Integer id,
                    String firstName,
@@ -19,7 +23,8 @@ public class Shipper {
                    LocalDate birth,
                    String phone,
                    String email,
-                   String address
+                   String address,
+                   String password
                    ){
         this.shipper_id = new SimpleIntegerProperty(this, "Shipper Id", id);
         this.firstName = new SimpleStringProperty(this, "First Name", firstName);
@@ -28,6 +33,7 @@ public class Shipper {
         this.phone = new SimpleStringProperty(this, "Phone", phone);
         this.email = new SimpleStringProperty(this, "Email", email);
         this.address = new SimpleStringProperty(this, "Address", address);
+        this.password = new SimpleStringProperty(this, "Password", password);
     }
     public Shipper(String firstName,
                    String lastName,
@@ -100,5 +106,11 @@ public class Shipper {
 
     public void setBirth(LocalDate birth) {
         this.birth.set(birth);
+    }
+    public StringProperty passwordProperty() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password.set(password);
     }
 }

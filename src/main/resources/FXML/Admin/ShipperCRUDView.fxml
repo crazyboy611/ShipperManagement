@@ -1,91 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" styleClass="view_container" stylesheets="@../../Styles/ShipperCRUDView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Admin.ShipperCRUDController">
+<AnchorPane prefHeight="750.0" prefWidth="1159.0" styleClass="view_container" stylesheets="@../../Styles/ShipperCRUDView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Admin.ShipperCRUDController">
    <TableView fx:id="shipper_table_view" layoutX="65.0" layoutY="36.0" prefHeight="318.0" prefWidth="960.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
       <columns>
-         <TableColumn fx:id="shipper_id_col" prefWidth="107.0" text="Shipper ID" />
-         <TableColumn fx:id="first_name_col" prefWidth="140.0" text="FIrst Name" />
+         <TableColumn fx:id="shipper_id_col" prefWidth="72.0" text="Shipper ID" />
+         <TableColumn fx:id="first_name_col" prefWidth="140.0" text="First Name" />
          <TableColumn fx:id="last_name_col" prefWidth="140.0" text="Last Name" />
          <TableColumn fx:id="birth_col" prefWidth="140.0" text="Birth" />
          <TableColumn fx:id="phone_col" prefWidth="140.0" text="Phone" />
-         <TableColumn fx:id="email_col" prefWidth="140.0" text="Email" />
-         <TableColumn fx:id="address_col" prefWidth="152.0" text="Address" />
+         <TableColumn fx:id="email_col" prefWidth="149.0" text="Email" />
+         <TableColumn fx:id="address_col" minWidth="0.0" prefWidth="149.0" text="Address" />
+         <TableColumn fx:id="btn_col" prefWidth="188.0" text="View Order" />
+         <TableColumn fx:id="password_col" minWidth="0.0" prefWidth="0.0" text="Password" />
       </columns>
    </TableView>
-   <VBox layoutX="20.0" layoutY="363.0" prefHeight="351.0" prefWidth="369.0" styleClass="info_view">
+   <VBox layoutX="539.0" layoutY="363.0" prefHeight="351.0" prefWidth="271.0" styleClass="info_view">
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" />
       <HBox prefHeight="21.0" prefWidth="359.0">
          <TextField fx:id="first_name_fd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
-         <Label text="Label">
-            <HBox.margin>
-               <Insets bottom="10.0" left="10.0" top="10.0" />
-            </HBox.margin>
-         </Label>
       </HBox>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
       <HBox prefHeight="0.0" prefWidth="359.0">
          <TextField fx:id="last_name_fd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
-         <Label text="Label">
-            <HBox.margin>
-               <Insets bottom="10.0" left="10.0" top="10.0" />
-            </HBox.margin>
-         </Label>
       </HBox>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Birth:" />
       <HBox prefHeight="0.0" prefWidth="359.0">
-         <DatePicker fx:id="date_picker" prefHeight="79.0" />
-         <Label text="Label">
-            <HBox.margin>
-               <Insets bottom="10.0" left="10.0" top="10.0" />
-            </HBox.margin>
-         </Label>
+         <DatePicker fx:id="date_picker" minHeight="-Infinity" minWidth="-Infinity" prefHeight="79.0" />
       </HBox>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone:" />
       <HBox prefHeight="0.0" prefWidth="359.0">
          <TextField fx:id="phone_fd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
-         <Label text="Label">
-            <HBox.margin>
-               <Insets bottom="10.0" left="10.0" top="10.0" />
-            </HBox.margin>
-         </Label>
       </HBox>
    </VBox>
-   <VBox layoutX="500.0" layoutY="363.0" prefHeight="156.0" prefWidth="377.0" styleClass="info_view">
+   <VBox layoutX="848.0" layoutY="363.0" prefHeight="237.0" prefWidth="281.0" styleClass="info_view">
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
       <HBox prefHeight="0.0" prefWidth="359.0">
          <TextField fx:id="email_fd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
-         <Label text="Label">
-            <HBox.margin>
-               <Insets bottom="10.0" left="10.0" top="10.0" />
-            </HBox.margin>
-         </Label>
       </HBox>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" />
       <HBox prefHeight="0.0" prefWidth="359.0">
          <TextField fx:id="address_fd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
-         <Label text="Label">
-            <HBox.margin>
-               <Insets bottom="10.0" left="10.0" top="10.0" />
-            </HBox.margin>
-         </Label>
+      </HBox>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" />
+      <HBox prefHeight="0.0" prefWidth="359.0">
+         <TextField fx:id="password_fd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
       </HBox>
    </VBox>
-   <HBox layoutX="510.0" layoutY="558.0" prefHeight="114.0" prefWidth="377.0" styleClass="crud_nav">
-      <Button fx:id="create_btn" mnemonicParsing="false" text="Create" />
-      <Button fx:id="update_btn" mnemonicParsing="false" text="Update" />
-      <Button fx:id="delete_btn" mnemonicParsing="false" text="Delete" />
-      <Button fx:id="refresh_btn" mnemonicParsing="false" text="Refresh" />
-   </HBox>
+   <VBox layoutX="20.0" layoutY="347.0" prefHeight="392.0" prefWidth="114.0" styleClass="crud_nav">
+      <Button fx:id="save_btn" mnemonicParsing="false" styleClass="save_btn" text="Save" />
+      <Button fx:id="create_btn" mnemonicParsing="false" styleClass="save_btn" text="Create" />
+      <Button fx:id="edit_btn" mnemonicParsing="false" styleClass="edit_btn" text="Edit" />
+      <Button fx:id="delete_btn" mnemonicParsing="false" prefWidth="87.0" styleClass="delete_btn" text="Delete" />
+   </VBox>
+   <VBox layoutX="228.0" layoutY="375.0" prefHeight="282.0" prefWidth="199.0" styleClass="image_view">
+      <ImageView fx:id="personal_image_view" fitHeight="300.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" styleClass="image_view" VBox.vgrow="NEVER">
+         <Image url="@../../Images/ShipperImages/img.png" />
+      </ImageView>
+   </VBox>
+   <Button fx:id="clear_btn" layoutX="858.0" layoutY="642.0" mnemonicParsing="false" styleClass="clear_btn">
+      <graphic>
+         <FontAwesomeIconView glyphName="REFRESH" size="15" />
+      </graphic>
+   </Button>
+   <Button fx:id="upload_image_btn" layoutX="279.0" layoutY="657.0" mnemonicParsing="false" styleClass="upload_btn" text="Upload Image" AnchorPane.bottomAnchor="40.0">
+      <graphic>
+         <FontAwesomeIconView glyphName="UPLOAD" />
+      </graphic>
+   </Button>
+   <Text layoutX="289.0" layoutY="671.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal Image" />
 </AnchorPane>
