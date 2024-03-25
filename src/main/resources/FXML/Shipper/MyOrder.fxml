@@ -6,18 +6,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" styleClass="container" stylesheets="@../../Styles/MyOrdersView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-    <AnchorPane layoutX="56.0" layoutY="73.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
-        <TableView fx:id="my_orders_view" layoutX="41.0" layoutY="34.0" prefHeight="585.0" prefWidth="888.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1210.0" styleClass="container" stylesheets="@../../Styles/MyOrdersView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Shipper.OrdersTableViewController">
+    <AnchorPane layoutX="56.0" layoutY="25.0" prefHeight="710.0" prefWidth="1180.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="25.0">
+        <TableView fx:id="my_orders_view" layoutX="43.0" layoutY="60.0" prefHeight="622.0" prefWidth="1094.0">
             <columns>
                 <TableColumn fx:id="idCol" prefWidth="75.0" text="Order Id" />
                 <TableColumn fx:id="pickup_location_col" prefWidth="188.0" text="Pickup Location" />
-                <TableColumn fx:id="delivery_location_col" prefWidth="191.0" text="Delivery Location" />
-                <TableColumn fx:id="value_col" prefWidth="153.0" text="Value" />
-                <TableColumn fx:id="other_details_col" prefWidth="280.0" text="Other Details" />
+                <TableColumn fx:id="delivery_location_col" prefWidth="215.0" text="Delivery Location" />
+                <TableColumn fx:id="deli_date_expect_col" prefWidth="212.0" text="Delivery Date Expect" />
+                <TableColumn fx:id="value_col" prefWidth="175.0" text="Value" />
+                <TableColumn fx:id="other_details_col" prefWidth="228.0" text="Other Details" />
             </columns>
         </TableView>
+       <Text fx:id="date_label" layoutX="1070.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
     </AnchorPane>
     <Label fx:id="hello_label" layoutX="48.0" layoutY="29.0" styleClass="title" text="Hi, Trung" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
-    <Text fx:id="date_label" layoutX="895.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
 </AnchorPane>

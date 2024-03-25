@@ -17,7 +17,7 @@ public class Shipper {
     private StringProperty address;
     private StringProperty password;
     public Shipper(){}
-    public Shipper(Integer id,
+    public Shipper(Integer shipper_id,
                    String firstName,
                    String lastName,
                    LocalDate birth,
@@ -26,7 +26,7 @@ public class Shipper {
                    String address,
                    String password
                    ){
-        this.shipper_id = new SimpleIntegerProperty(this, "Shipper Id", id);
+        this.shipper_id = new SimpleIntegerProperty(this, "Shipper Id", shipper_id);
         this.firstName = new SimpleStringProperty(this, "First Name", firstName);
         this.lastName = new SimpleStringProperty(this, "Last Name", lastName);
         this.birth = new SimpleObjectProperty<>(this, "Birth", birth);
@@ -49,68 +49,28 @@ public class Shipper {
         this.email = new SimpleStringProperty(this, "Email", email);
         this.address = new SimpleStringProperty(this, "Address", address);
     }
-    public IntegerProperty shipper_idProperty() {
+    public IntegerProperty shipperIdProperty() {
         return shipper_id;
     }
-
-    public void setShipper_id(int shipper_id) {
-        this.shipper_id.set(shipper_id);
-    }
-
-
     public StringProperty firstNameProperty() {
         return firstName;
     }
-
-    public void setFirstName(String firstName) {
-        this.firstName.set(firstName);
-    }
-
-
     public StringProperty lastNameProperty() {
         return lastName;
     }
-
-    public void setLastName(String lastName) {
-        this.lastName.set(lastName);
-    }
-
-
     public StringProperty phoneProperty() {
         return phone;
     }
-
-    public void setPhone(String phone) {
-        this.phone.set(phone);
-    }
-
     public StringProperty emailProperty() {
         return email;
     }
-
-    public void setEmail(String email) {
-        this.email.set(email);
-    }
-
     public StringProperty addressProperty() {
         return address;
     }
-
-    public void setAddress(String address) {
-        this.address.set(address);
-    }
-
     public ObjectProperty<LocalDate> birthProperty() {
         return birth;
     }
-
-    public void setBirth(LocalDate birth) {
-        this.birth.set(birth);
-    }
     public StringProperty passwordProperty() {
         return password;
-    }
-    public void setPassword(String password) {
-        this.password.set(password);
     }
 }

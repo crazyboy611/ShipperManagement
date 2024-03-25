@@ -24,7 +24,7 @@ public class Model {
         this.databaseDriver = new DatabaseDriver();
         this.shipperLoginSuccessFlag = false;
         this.adminLoginSuccessFlag = false;
-        this.shipper = new Shipper("","",null,"", "", "");
+        this.shipper = new Shipper(0,"","",null,"", "", "", "");
         this.admin = new Admin("");
 //        this.clients = FXCollections.observableArrayList();
     }
@@ -45,6 +45,10 @@ public class Model {
         this.adminLoginSuccessFlag = adminLoginSuccessFlag;
     }
 
+    public Shipper getShipper() {
+        return shipper;
+    }
+
     public static synchronized Model getInstance() {
         if (model == null) {
             model = new Model();
@@ -63,6 +67,7 @@ public class Model {
         ResultSet resultSet = databaseDriver.getShipperData(phone, password);
         try {
             if(resultSet.next()){
+                this.shipper.shipperIdProperty().set(resultSet.getInt("shipper_id"));
                 this.shipper.firstNameProperty().set(resultSet.getString("firstname"));
                 this.shipper.lastNameProperty().set(resultSet.getString("lastname"));
                 this.shipper.phoneProperty().set(resultSet.getString("phone"));

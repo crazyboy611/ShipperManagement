@@ -22,14 +22,14 @@
          <Label prefHeight="69.0" prefWidth="180.0" text="Shipper Management" />
       </VBox>
       <VBox alignment="TOP_CENTER" layoutY="198.0" prefHeight="343.0" prefWidth="200.0" styleClass="menu_container" AnchorPane.topAnchor="198.0">
-         <Button fx:id="my_orders_btn" mnemonicParsing="false" text="My Orders">
-            <graphic>
-               <FontAwesomeIconView glyphName="HOME" size="20" text="" />
-            </graphic>
-         </Button>
          <Button id="profile" fx:id="profile_btn" mnemonicParsing="false" text="Profile">
             <graphic>
                <FontAwesomeIconView glyphName="USER" size="20" text="" />
+            </graphic>
+         </Button>
+         <Button fx:id="my_orders_btn" mnemonicParsing="false" text="My Orders">
+            <graphic>
+               <FontAwesomeIconView glyphName="LIST" size="20" />
             </graphic>
          </Button>
          <Button fx:id="logout_btn" mnemonicParsing="false" styleClass="alt_btn" text="Logout">

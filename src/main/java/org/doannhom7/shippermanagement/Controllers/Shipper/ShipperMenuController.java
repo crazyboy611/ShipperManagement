@@ -3,9 +3,9 @@ package org.doannhom7.shippermanagement.Controllers.Shipper;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import org.doannhom7.shippermanagement.Models.AccountType;
+import org.doannhom7.shippermanagement.Views.AccountType;
 import org.doannhom7.shippermanagement.Models.Model;
-import org.doannhom7.shippermanagement.Models.ShipperMenuOptions;
+import org.doannhom7.shippermanagement.Views.ShipperMenuOptions;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,7 +33,7 @@ public class ShipperMenuController implements Initializable {
         Model.getInstance().getViewFactory().closeStage(stage);
         Model.getInstance().setAdminLoginSuccessFlag(false);
         Model.getInstance().setShipperLoginSuccessFlag(false);
-        Model.getInstance().getViewFactory().setAccountType(AccountType.SHIPPER);
+        Model.getInstance().getViewFactory().setAccountType(AccountType.ADMIN);
         Model.getInstance().getViewFactory().showLoginWindow();
     }
 }

@@ -1,4 +1,4 @@
-package org.doannhom7.shippermanagement.Models;
+package org.doannhom7.shippermanagement.Views;
 
 public enum AdminMenuOptions {
     ALL_SHIPPERS_CRUD,

@@ -3,10 +3,10 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -27,7 +27,7 @@
          <TableColumn fx:id="password_col" minWidth="0.0" prefWidth="0.0" text="Password" />
       </columns>
    </TableView>
-   <VBox layoutX="539.0" layoutY="363.0" prefHeight="351.0" prefWidth="271.0" styleClass="info_view">
+   <VBox layoutX="539.0" layoutY="363.0" prefHeight="318.0" prefWidth="271.0" styleClass="info_view">
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" />
       <HBox prefHeight="21.0" prefWidth="359.0">
          <TextField fx:id="first_name_fd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
@@ -65,20 +65,18 @@
       <Button fx:id="edit_btn" mnemonicParsing="false" styleClass="edit_btn" text="Edit" />
       <Button fx:id="delete_btn" mnemonicParsing="false" prefWidth="87.0" styleClass="delete_btn" text="Delete" />
    </VBox>
-   <VBox layoutX="228.0" layoutY="375.0" prefHeight="282.0" prefWidth="199.0" styleClass="image_view">
-      <ImageView fx:id="personal_image_view" fitHeight="300.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" styleClass="image_view" VBox.vgrow="NEVER">
-         <Image url="@../../Images/ShipperImages/img.png" />
-      </ImageView>
-   </VBox>
+   <ImageView fx:id="personal_image_view" fitHeight="280.0" fitWidth="197.0" layoutX="231.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true" styleClass="image_view" />
    <Button fx:id="clear_btn" layoutX="858.0" layoutY="642.0" mnemonicParsing="false" styleClass="clear_btn">
       <graphic>
          <FontAwesomeIconView glyphName="REFRESH" size="15" />
       </graphic>
    </Button>
-   <Button fx:id="upload_image_btn" layoutX="279.0" layoutY="657.0" mnemonicParsing="false" styleClass="upload_btn" text="Upload Image" AnchorPane.bottomAnchor="40.0">
+   <Button fx:id="upload_image_btn" layoutX="279.0" layoutY="703.0" mnemonicParsing="false" styleClass="upload_btn" text="Upload Image" AnchorPane.bottomAnchor="22.0">
       <graphic>
          <FontAwesomeIconView glyphName="UPLOAD" />
       </graphic>
    </Button>
-   <Text layoutX="289.0" layoutY="671.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal Image" />
+   <Text layoutX="289.0" layoutY="695.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal Image" />
+   <Label fx:id="error_lbl" layoutX="551.0" layoutY="695.0" textFill="RED" />
+   <Text fill="RED" layoutX="297.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*REQUIRED*" />
 </AnchorPane>

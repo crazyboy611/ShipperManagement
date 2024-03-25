@@ -4,11 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.doannhom7.shippermanagement.Models.AccountType;
+import org.doannhom7.shippermanagement.Views.AccountType;
 import org.doannhom7.shippermanagement.Models.Model;
 
 import java.net.URL;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {

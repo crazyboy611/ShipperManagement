@@ -1,20 +1,33 @@
 package org.doannhom7.shippermanagement.Controllers.Admin;
 
+import animatefx.animation.Shake;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.doannhom7.shippermanagement.Models.Model;
 import org.doannhom7.shippermanagement.Models.Shipper;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.URL;
 import java.sql.Blob;
 import java.sql.ResultSet;
@@ -47,6 +60,7 @@ public class ShipperCRUDController implements Initializable {
     public Button clear_btn;
     public Button upload_image_btn;
     private final ObservableList<Shipper> shippers = FXCollections.observableArrayList();
+    public Label error_lbl;
 
     private boolean editFlag;
     private boolean createFlag;
@@ -73,12 +87,30 @@ public class ShipperCRUDController implements Initializable {
     public void setEditFlag(boolean editFlag) {
         this.editFlag = editFlag;
     }
+
+    public TableView<Shipper> getShipper_table_view() {
+        return shipper_table_view;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initTable();
         setCreateFlag(true);
         setEditFlag(false);
         setDeleteFlag(true);
+        shipper_table_view.getSelectionModel().selectedItemProperty().addListener(observable -> {
+            if(getDeleteFlag()) {
+                personal_image_view.setImage(null);
+                showPersonalImage();
+                first_name_fd.setText(shipper_table_view.getSelectionModel().getSelectedItem().firstNameProperty().get());
+                last_name_fd.setText(shipper_table_view.getSelectionModel().getSelectedItem().lastNameProperty().get());
+                password_fd.setText(shipper_table_view.getSelectionModel().getSelectedItem().passwordProperty().get());
+                address_fd.setText(shipper_table_view.getSelectionModel().getSelectedItem().addressProperty().get());
+                date_picker.setValue(shipper_table_view.getSelectionModel().getSelectedItem().birthProperty().getValue());
+                phone_fd.setText(shipper_table_view.getSelectionModel().getSelectedItem().phoneProperty().get());
+                email_fd.setText(shipper_table_view.getSelectionModel().getSelectedItem().emailProperty().get());
+            }
+        });
         clear_btn.setOnAction(actionEvent -> {
             setEmpty();
         });
@@ -99,29 +131,33 @@ public class ShipperCRUDController implements Initializable {
         upload_image_btn.setOnAction(actionEvent -> {
             uploadPersonalImage();
         });
+
         create_btn.setOnAction(actionEvent -> {
             if(getCreateFlag()) {
                 if(first_name_fd.getText().isEmpty()) {
                     first_name_fd.setStyle("-fx-border-color: red; -fx-border-width: 2");
-                    new animatefx.animation.Shake(first_name_fd).play();
+                    new Shake(first_name_fd).play();
                 }else if(last_name_fd.getText().isEmpty()) {
                     last_name_fd.setStyle("-fx-border-color: red; -fx-border-width: 2");
-                    new animatefx.animation.Shake(last_name_fd).play();
+                    new Shake(last_name_fd).play();
                 }else if(date_picker.getValue() == null) {
                     date_picker.setStyle("-fx-border-color: red; -fx-border-width: 2");
-                    new animatefx.animation.Shake(date_picker).play();
+                    new Shake(date_picker).play();
                 }else if(phone_fd.getText().isEmpty()) {
                     phone_fd.setStyle("-fx-border-color: red; -fx-border-width: 2");
-                    new animatefx.animation.Shake(phone_fd).play();
+                    new Shake(phone_fd).play();
                 }else if(email_fd.getText().isEmpty()) {
                     email_fd.setStyle("-fx-border-color: red; -fx-border-width: 2");
-                    new animatefx.animation.Shake(email_fd).play();
+                    new Shake(email_fd).play();
                 }else if(address_fd.getText().isEmpty()) {
                     address_fd.setStyle("-fx-border-color: red; -fx-border-width: 2");
-                    new animatefx.animation.Shake(address_fd).play();
+                    new Shake(address_fd).play();
                 }else if(password_fd.getText().isEmpty()) {
                     password_fd.setStyle("-fx-border-color: red; -fx-border-width: 2");
-                    new animatefx.animation.Shake(password_fd).play();
+                    new Shake(password_fd).play();
+                }else if(personal_image_view.getImage() == null) {
+                    error_lbl.setText("Please Load Personal Image!");
+                    error_lbl.setStyle("-fx-text-fill: red;");
                 }else{
                     createShipper();
                 }
@@ -150,7 +186,7 @@ public class ShipperCRUDController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        shipper_id_col.setCellValueFactory(new PropertyValueFactory<>("shipper_id"));
+        shipper_id_col.setCellValueFactory(new PropertyValueFactory<>("shipperId"));
         first_name_col.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         last_name_col.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         birth_col.setCellValueFactory(new PropertyValueFactory<>("birth"));
@@ -170,6 +206,25 @@ public class ShipperCRUDController implements Initializable {
                     } else {
                         final Button viewOrders = new Button("View Orders");
                         viewOrders.setStyle("-fx-background-color:#0066CCFF; -fx-text-fill: white;");
+                        viewOrders.setOnAction(actionEvent -> {
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML/Admin/ShipperOrderView.fxml"));
+                            ResultSet resultSet1 = Model.getInstance().getDatabaseDriver().getOrdersByShipperId(getTableRow().getItem().shipperIdProperty().get());
+                            String shipper_name = getTableRow().getItem().lastNameProperty().get();
+                            ShipperOrderTableViewController shipperOrderTableViewController = new ShipperOrderTableViewController(resultSet1, shipper_name);
+                            fxmlLoader.setController(shipperOrderTableViewController);
+                            Stage stage = new Stage();
+                            Scene scene;
+                            try {
+                                scene = new Scene(fxmlLoader.load());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                            stage.setScene(scene);
+                            stage.initModality(Modality.APPLICATION_MODAL);
+                            stage.setResizable(false);
+                            stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icons8-shipper-64.png"))));
+                            stage.show();
+                        });
                         setGraphic(viewOrders);
                         setText(null);
                     }
@@ -206,7 +261,7 @@ public class ShipperCRUDController implements Initializable {
 
     }
     private void saveShipper() {
-            int id = shipper_table_view.getSelectionModel().getSelectedItem().shipper_idProperty().get();
+            int id = shipper_table_view.getSelectionModel().getSelectedItem().shipperIdProperty().get();
             String fName = first_name_fd.getText();
             String lName = last_name_fd.getText();
             String phone = phone_fd.getText();
@@ -214,7 +269,8 @@ public class ShipperCRUDController implements Initializable {
             String birth = date_picker.getValue().toString();
             String email = email_fd.getText();
             String address = address_fd.getText();
-            Model.getInstance().getDatabaseDriver().updateShipperData(id, fName, lName,birth, phone, email, address, password);
+            InputStream inputStream = imageToInputStream(personal_image_view.getImage());
+            Model.getInstance().getDatabaseDriver().updateShipperData(id, fName, lName,birth, phone, email, address, password, inputStream);
             setEmpty();
             initTable();
     }
@@ -229,14 +285,16 @@ public class ShipperCRUDController implements Initializable {
             String birth = date_picker.getValue().toString();
             String email = email_fd.getText();
             String address = address_fd.getText();
-            Model.getInstance().getDatabaseDriver().createNewShipper(fName, lName,birth, phone, email, address, password);
+            InputStream image = imageToInputStream(personal_image_view.getImage());
+            Model.getInstance().getDatabaseDriver().createNewShipper(fName, lName, birth, phone, email, address, password, image);
             setEmpty();
             initTable();
         }
     }
     private void deleteShipper() {
-        int id = shipper_table_view.getSelectionModel().getSelectedItem().shipper_idProperty().get();
+        int id = shipper_table_view.getSelectionModel().getSelectedItem().shipperIdProperty().get();
         Model.getInstance().getDatabaseDriver().deleteShipper(id);
+        personal_image_view.setImage(null);
         initTable();
     }
     private void setEmpty() {
@@ -254,6 +312,8 @@ public class ShipperCRUDController implements Initializable {
         email_fd.setStyle("");
         address_fd.setText("");
         address_fd.setStyle("");
+        personal_image_view.setImage(null);
+        initTable();
     }
     private void uploadPersonalImage() {
         FileChooser fileChooser = new FileChooser();
@@ -268,5 +328,40 @@ public class ShipperCRUDController implements Initializable {
             }
         }
     }
+    private void showPersonalImage() {
+            IntegerProperty idProperty;
+            idProperty = shipper_table_view.getSelectionModel().getSelectedItem().shipperIdProperty();
+            InputStream inputStream = null;
+            try{
+                inputStream = Model.getInstance().getDatabaseDriver().getPersonalImage(idProperty.get());
+                if(inputStream != null){
+                    Image image = new Image(inputStream, personal_image_view.getFitWidth(), personal_image_view.getFitHeight(), true, true);
+                    personal_image_view.setImage(image);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
+    }
+    public static InputStream imageToInputStream(Image image) {
+        WritableImage writableImage = new WritableImage((int) image.getWidth(), (int) image.getHeight());
+        PixelReader pixelReader = image.getPixelReader();
+        BufferedImage bufferedImage = new BufferedImage((int) image.getWidth(), (int) image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+
+        for (int y = 0; y < image.getHeight(); y++) {
+            for (int x = 0; x < image.getWidth(); x++) {
+                int argb = pixelReader.getArgb(x, y);
+                bufferedImage.setRGB(x, y, argb);
+            }
+        }
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(bufferedImage, "png", outputStream);
+            return new ByteArrayInputStream(outputStream.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

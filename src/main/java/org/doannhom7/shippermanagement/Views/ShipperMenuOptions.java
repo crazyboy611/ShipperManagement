@@ -1,4 +1,4 @@
-package org.doannhom7.shippermanagement.Models;
+package org.doannhom7.shippermanagement.Views;
 
 public enum ShipperMenuOptions {
     MY_PROFILE,

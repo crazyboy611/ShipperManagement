@@ -5,13 +5,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.layout.AnchorPane;
 import org.doannhom7.shippermanagement.Controllers.Admin.AdminController;
 import org.doannhom7.shippermanagement.Controllers.Shipper.ShipperController;
-import org.doannhom7.shippermanagement.Models.AccountType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import org.doannhom7.shippermanagement.Models.AdminMenuOptions;
-import org.doannhom7.shippermanagement.Models.ShipperMenuOptions;
 
 public class ViewFactory {
     private AccountType accountType;
@@ -99,7 +96,7 @@ public class ViewFactory {
     public AnchorPane getAllOrdersCrudView() {
         try{
             if(allOrdersCrudView == null) {
-                allOrdersCrudView = new FXMLLoader(getClass().getResource("/FXML/Admin/AllOrderCRUD.fxml")).load();
+                allOrdersCrudView = new FXMLLoader(getClass().getResource("/FXML/Admin/OrderCrudView.fxml")).load();
             }
         }catch (Exception e){
             e.printStackTrace();

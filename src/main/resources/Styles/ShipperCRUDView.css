@@ -41,8 +41,8 @@
     -fx-text-fill: white;
     -fx-background-color: red;
 }
-.image_view {
-    -fx-border-color: red;
+.image_view ImageView{
+    /*-fx-border-color: red;*/
     -fx-border-radius: 8;
     -fx-border-width: 2;
     -fx-background-color: #ffffff;
