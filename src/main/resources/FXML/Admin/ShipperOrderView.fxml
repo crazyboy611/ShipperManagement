@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="1117.0" styleClass="container" stylesheets="@../../Styles/AllOrders.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <AnchorPane layoutX="15.0" layoutY="16.0" prefHeight="487.0" prefWidth="1091.0">
+        <TableView fx:id="my_orders_view" layoutX="8.0" layoutY="41.0" prefHeight="426.0" prefWidth="1072.0">
+            <columns>
+                <TableColumn fx:id="idCol" prefWidth="94.0" text="Order Id" />
+                <TableColumn fx:id="pickup_location_col" prefWidth="190.0" text="Pickup Location" />
+                <TableColumn fx:id="delivery_location_col" prefWidth="203.0" text="Delivery Location" />
+                <TableColumn fx:id="delivery_date_expect_col" prefWidth="168.0" text="Delivery Date Expect" />
+                <TableColumn fx:id="value_col" prefWidth="172.0" text="Value" />
+                <TableColumn fx:id="other_details_col" prefWidth="244.0" text="Other Details" />
+            </columns>
+        </TableView>
+      <Label fx:id="shipper_name" layoutX="9.0" layoutY="-2.0" styleClass="title" text="Label" />
+    </AnchorPane>
+</AnchorPane>

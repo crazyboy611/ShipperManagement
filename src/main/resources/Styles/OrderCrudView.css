@@ -1,0 +1,74 @@
+.view_container {
+    -fx-background-color: #EEEEEE;
+}
+.info_view {
+    -fx-spacing: 15;
+    -fx-padding: 0 0 0 10;
+}
+.info_text_field {
+    -fx-pref-height: 35;
+    -fx-pref-width: 250;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 5, 0, 0, 5);
+}
+.info_view DatePicker {
+    -fx-pref-height: 35;
+    -fx-pref-width: 250;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 5, 0, 0, 5);
+}
+.info_view Label {
+     -fx-pref-height: 30;
+     -fx-pref-width: 100;
+    -fx-background-radius: 3;
+    -fx-background-color: #FFFFFF;
+     -fx-effect: dropshadow(three-pass-box, #AAAAAA, 5, 0, 0, 5);
+}
+.shipper_info {
+    -fx-spacing: 15;
+}
+.shipper_info ComboBox{
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 5, 0, 0, 5);
+}
+.shipper_info Label{
+    -fx-pref-heigh: 30;
+    -fx-pref-width: 100;
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 3;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 5, 0, 0, 5);
+ }
+.crud_nav {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+    -fx-alignment: center;
+    -fx-spacing: 15;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 5, 0, 0, 5);
+}
+.crud_nav Button {
+    -fx-pref-width: 80;
+    -fx-pref-height: 80 ;
+}
+.save_btn {
+    -fx-font-size: 1.5em;
+    -fx-text-fill: white;
+    -fx-background-color: #5BBD2BFF;
+}
+.edit_btn{
+    -fx-font-size: 1.5em;
+    -fx-text-fill: white;
+    -fx-background-color: #F1AF00FF;
+}
+.delete_btn {
+    -fx-font-size: 1.5em;
+    -fx-text-fill: white;
+    -fx-background-color: red;
+}
+.clear_btn {
+    -fx-background-color: red;
+    -fx-pref-height: 30;
+    -fx-pref-width: 30;
+}
+.clear_btn FontAwesomeIconView{
+    -fx-fill: white;
+}
+Button:hover {
+    -fx-cursor: hand;
+}
