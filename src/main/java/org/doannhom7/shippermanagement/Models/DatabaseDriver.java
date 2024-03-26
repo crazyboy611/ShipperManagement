@@ -11,7 +11,6 @@ public class DatabaseDriver {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("success");
     }
     public ResultSet getAllShipper() {
         PreparedStatement preparedStatement;
