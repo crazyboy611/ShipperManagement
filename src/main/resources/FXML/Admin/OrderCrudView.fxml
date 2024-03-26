@@ -13,16 +13,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1159.0" styleClass="view_container" stylesheets="@../../Styles/OrderCrudView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Admin.OrderCrudViewController">
-   <TableView fx:id="order_table_view" layoutX="65.0" layoutY="36.0" prefHeight="318.0" prefWidth="960.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+<AnchorPane prefHeight="750.0" prefWidth="1171.0" styleClass="view_container" stylesheets="@../../Styles/OrderCrudView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Admin.OrderCrudViewController">
+   <TableView fx:id="order_table_view" layoutX="65.0" layoutY="36.0" prefHeight="318.0" prefWidth="1113.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="20.0">
       <columns>
-         <TableColumn fx:id="order_id_col" prefWidth="100.0" text="Order ID" />
-         <TableColumn fx:id="shipper_id_col" prefWidth="147.0" text="Shipper ID" />
-         <TableColumn fx:id="pickup_location_col" prefWidth="184.0" text="Pickup Location" />
-         <TableColumn fx:id="delivery_location_col" prefWidth="180.0" text="Delivery Location" />
-         <TableColumn fx:id="deli_date_expect_col" prefWidth="182.0" text="Delivery Date Expect" />
-         <TableColumn fx:id="value_col" prefWidth="132.0" text="Value" />
-         <TableColumn fx:id="other_details_col" minWidth="0.0" prefWidth="193.0" text="Other Details" />
+         <TableColumn fx:id="order_id_col" prefWidth="82.0" text="Order ID" />
+         <TableColumn fx:id="shipper_id_col" prefWidth="97.0" text="Shipper ID" />
+         <TableColumn fx:id="pickup_location_col" prefWidth="175.0" text="Pickup Location" />
+         <TableColumn fx:id="delivery_location_col" prefWidth="203.0" text="Delivery Location" />
+         <TableColumn fx:id="deli_date_expect_col" prefWidth="172.0" text="Delivery Date Expect" />
+         <TableColumn fx:id="value_col" prefWidth="133.0" text="Value" />
+         <TableColumn fx:id="other_details_col" minWidth="0.0" prefWidth="139.0" text="Other Details" />
+         <TableColumn fx:id="view_shipper_btn_col" prefWidth="107.0" text="View Shipper" />
       </columns>
    </TableView>
    <VBox layoutX="20.0" layoutY="405.0" prefHeight="318.0" prefWidth="281.0" styleClass="info_view">
@@ -51,7 +52,7 @@
       <TextField fx:id="other_details_fd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="info_text_field" />
       <HBox prefHeight="0.0" prefWidth="359.0" />
    </VBox>
-   <HBox layoutX="725.0" layoutY="389.0" prefHeight="116.0" prefWidth="414.0" styleClass="crud_nav" stylesheets="@../../Styles/OrderCrudView.css">
+   <HBox layoutX="727.0" layoutY="392.0" prefHeight="116.0" prefWidth="404.0" styleClass="crud_nav" stylesheets="@../../Styles/OrderCrudView.css">
       <Button fx:id="save_btn" mnemonicParsing="false" styleClass="save_btn" text="Save" />
       <Button fx:id="create_btn" mnemonicParsing="false" styleClass="save_btn" text="Create" />
       <Button fx:id="edit_btn" mnemonicParsing="false" styleClass="edit_btn" text="Edit" />

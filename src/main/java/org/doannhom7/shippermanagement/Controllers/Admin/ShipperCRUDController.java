@@ -125,6 +125,10 @@ public class ShipperCRUDController implements Initializable {
         });
         delete_btn.setOnAction(actionEvent -> {
             if(!shipper_table_view.getSelectionModel().isEmpty() & getDeleteFlag()) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirm");
+                alert.setHeaderText("Are you sure you want to delete this Shipper?");
+                alert.showAndWait();
                 deleteShipper();
             }
         });
@@ -220,6 +224,7 @@ public class ShipperCRUDController implements Initializable {
                                 throw new RuntimeException(e);
                             }
                             stage.setScene(scene);
+                            stage.setTitle("Shipper Information");
                             stage.initModality(Modality.APPLICATION_MODAL);
                             stage.setResizable(false);
                             stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icons8-shipper-64.png"))));

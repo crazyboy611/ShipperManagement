@@ -1,0 +1,12 @@
+.container {
+    -fx-background-color: #EEEEEE;
+    -fx-padding: 5 5 5 5 ;
+}
+.shipper-info {
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 5, 0, 0, 5);
+    -fx-background-radius: 5;
+}
+.shipper-info Label{
+    -fx-font-weight: bold;
+}

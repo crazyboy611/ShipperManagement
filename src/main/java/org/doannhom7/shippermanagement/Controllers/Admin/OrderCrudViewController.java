@@ -1,20 +1,30 @@
 package org.doannhom7.shippermanagement.Controllers.Admin;
 
 import animatefx.animation.Shake;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Paint;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.doannhom7.shippermanagement.Models.Model;
 import org.doannhom7.shippermanagement.Models.Order;
 import org.doannhom7.shippermanagement.Models.Shipper;
 
 import javax.sound.midi.Soundbank;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -28,6 +38,7 @@ public class OrderCrudViewController implements Initializable {
     public TableColumn<Order, String> deli_date_expect_col;
     public TableColumn<Order, String> value_col;
     public TableColumn<Order, String> other_details_col;
+    public TableColumn<Order, String> view_shipper_btn_col;
     public TextField pickup_location_fd;
     public TextField deli_location_fd;
     public DatePicker date_picker;
@@ -147,6 +158,52 @@ public class OrderCrudViewController implements Initializable {
         value_col.setCellValueFactory(new PropertyValueFactory<>("value"));
         deli_date_expect_col.setCellValueFactory(new PropertyValueFactory<>("deliveryDateExpect"));
         other_details_col.setCellValueFactory(new PropertyValueFactory<>("otherDetails"));
+        Callback<TableColumn<Order, String>, TableCell<Order, String>> cellFactory = (TableColumn<Order, String> param) -> {
+            return new TableCell<Order, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+
+                    } else {
+                        FontAwesomeIconView icon = new FontAwesomeIconView(FontAwesomeIcon.USER);
+                        icon.setFill(Paint.valueOf("#FFFFFF"));
+                        final Button viewShipper = new Button();
+                        viewShipper.setGraphic(icon);
+                        viewShipper.setStyle("-fx-background-color:#0099CCFF; -fx-text-fill: white;");
+                        if(getTableRow().getItem().shipperIdProperty().get() == 0){
+                            viewShipper.setDisable(true);
+                        }else {
+                            viewShipper.setDisable(false);
+                            viewShipper.setOnAction(actionEvent -> {
+                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML/Admin/ShipperInfoView.fxml"));
+                                ResultSet resultSet1 = Model.getInstance().getDatabaseDriver().findShipperById(getTableRow().getItem().shipperIdProperty().get());
+                                ShipperInfoViewController shipperOrderTableViewController = new ShipperInfoViewController(resultSet1);
+                                fxmlLoader.setController(shipperOrderTableViewController);
+                                Stage stage = new Stage();
+                                Scene scene;
+                                try {
+                                    scene = new Scene(fxmlLoader.load());
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                stage.setScene(scene);
+                                stage.initModality(Modality.APPLICATION_MODAL);
+                                stage.setResizable(false);
+                                stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icons8-shipper-64.png"))));
+                                stage.show();
+                            });
+                        }
+
+                        setGraphic(viewShipper);
+                        setText(null);
+                    }
+                };
+            };
+        };
+        view_shipper_btn_col.setCellFactory(cellFactory);
         order_table_view.setItems(orders);
     }
     private void onEdit() {
