@@ -26,6 +26,9 @@ public class ShipperInfoViewController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        init();
+    }
+    private void init() {
         try {
             if(resultSet.next()) {
                 int id = resultSet.getInt("shipper_id");

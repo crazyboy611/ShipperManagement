@@ -66,4 +66,5 @@
    <Text layoutX="34.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shipper ID" />
    <Text layoutX="111.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" />
    <Text layoutX="214.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
+   <FontAwesomeIconView glyphName="USER" layoutX="1011.0" layoutY="660.0" />
 </AnchorPane>

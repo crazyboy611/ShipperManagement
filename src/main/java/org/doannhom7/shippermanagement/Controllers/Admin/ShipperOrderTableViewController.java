@@ -48,11 +48,11 @@ public class ShipperOrderTableViewController implements Initializable {
         }catch (Exception e){
             e.printStackTrace();
         }
-        idCol.setCellValueFactory(new PropertyValueFactory<>("order_id"));
-        pickup_location_col.setCellValueFactory(new PropertyValueFactory<>("pickup_location"));
-        delivery_location_col.setCellValueFactory(new PropertyValueFactory<>("delivery_location"));
+        idCol.setCellValueFactory(new PropertyValueFactory<>("orderId"));
+        pickup_location_col.setCellValueFactory(new PropertyValueFactory<>("pickupLocation"));
+        delivery_location_col.setCellValueFactory(new PropertyValueFactory<>("deliveryLocation"));
         value_col.setCellValueFactory(new PropertyValueFactory<>("value"));
-        other_details_col.setCellValueFactory(new PropertyValueFactory<>("other_details"));
+        other_details_col.setCellValueFactory(new PropertyValueFactory<>("otherDetails"));
         delivery_date_expect_col.setCellValueFactory(new PropertyValueFactory<>("deliveryDateExpect"));
         my_orders_view.setItems(orders);
     }
