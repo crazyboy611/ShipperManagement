@@ -19,17 +19,13 @@ import org.doannhom7.shippermanagement.Models.Model;
 import org.doannhom7.shippermanagement.Models.Order;
 import org.doannhom7.shippermanagement.Models.Shipper;
 
-import javax.sound.midi.Soundbank;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class OrderCrudViewController implements Initializable {
+public class OrderCrudController implements Initializable {
     public TableView<Order> order_table_view;
     public TableColumn<Order, Integer> order_id_col;
     public TableColumn<Shipper, Integer> shipper_id_col;

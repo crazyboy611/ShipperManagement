@@ -88,9 +88,6 @@ public class ShipperCRUDController implements Initializable {
         this.editFlag = editFlag;
     }
 
-    public TableView<Shipper> getShipper_table_view() {
-        return shipper_table_view;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -262,8 +259,6 @@ public class ShipperCRUDController implements Initializable {
             setCreateFlag(false);
             setEditFlag(true);
         }
-
-
     }
     private void saveShipper() {
             int id = shipper_table_view.getSelectionModel().getSelectedItem().shipperIdProperty().get();
@@ -334,19 +329,18 @@ public class ShipperCRUDController implements Initializable {
         }
     }
     private void showPersonalImage() {
-            IntegerProperty idProperty;
-            idProperty = shipper_table_view.getSelectionModel().getSelectedItem().shipperIdProperty();
-            InputStream inputStream = null;
-            try{
-                inputStream = Model.getInstance().getDatabaseDriver().getPersonalImage(idProperty.get());
-                if(inputStream != null){
-                    Image image = new Image(inputStream, personal_image_view.getFitWidth(), personal_image_view.getFitHeight(), true, true);
-                    personal_image_view.setImage(image);
-                }
-            }catch (Exception e){
-                e.printStackTrace();
+        IntegerProperty idProperty;
+        idProperty = shipper_table_view.getSelectionModel().getSelectedItem().shipperIdProperty();
+        InputStream inputStream = null;
+        try{
+            inputStream = Model.getInstance().getDatabaseDriver().getPersonalImage(idProperty.get());
+            if(inputStream != null){
+                Image image = new Image(inputStream, personal_image_view.getFitWidth(), personal_image_view.getFitHeight(), true, true);
+                personal_image_view.setImage(image);
             }
-
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public static InputStream imageToInputStream(Image image) {
         WritableImage writableImage = new WritableImage((int) image.getWidth(), (int) image.getHeight());
