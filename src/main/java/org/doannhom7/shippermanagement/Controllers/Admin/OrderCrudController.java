@@ -5,6 +5,8 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -50,6 +52,7 @@ public class OrderCrudController implements Initializable {
     public Label first_name_lbl;
     public Label last_name_lbl;
     public Label pNumber_lbl;
+    public TextField search_fd;
     private boolean editFlag;
     private boolean createFlag;
     private boolean deleteFlag;
@@ -201,6 +204,36 @@ public class OrderCrudController implements Initializable {
         };
         view_shipper_btn_col.setCellFactory(cellFactory);
         order_table_view.setItems(orders);
+
+        FilteredList<Order> filteredData = new FilteredList<>(orders, b -> true);
+
+        search_fd.textProperty().addListener((observableValue, oldVal, newVal) -> {
+            filteredData.setPredicate(predicateOrder -> {
+                if(newVal.isEmpty() || newVal.isBlank()) {
+                    return true;
+                }
+                String searchKeyword = newVal.toLowerCase();
+                if(predicateOrder.orderIdProperty().getValue().toString().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                }else if(predicateOrder.pickupLocationProperty().get().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                }else if(predicateOrder.deliveryLocationProperty().get().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                }else if(predicateOrder.valueProperty().getValue().toString().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                }else if(predicateOrder.deliveryDateExpectProperty().get().toString().contains(searchKeyword)){
+                    return true;
+                }else{
+                    return false;
+                }
+            });
+        });
+
+        SortedList<Order> sortedList = new SortedList<>(filteredData);
+
+        sortedList.comparatorProperty().bind(order_table_view.comparatorProperty());
+
+        order_table_view.setItems(sortedList);
     }
     private void onEdit() {
         if(!order_table_view.getSelectionModel().isEmpty()){

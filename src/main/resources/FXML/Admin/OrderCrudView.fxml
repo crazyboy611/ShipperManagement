@@ -11,10 +11,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1171.0" styleClass="view_container" stylesheets="@../../Styles/OrderCrudView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Admin.OrderCrudViewController">
-   <TableView fx:id="order_table_view" layoutX="65.0" layoutY="36.0" prefHeight="318.0" prefWidth="1113.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="20.0">
+<AnchorPane prefHeight="865.0" prefWidth="1171.0" styleClass="view_container" stylesheets="@../../Styles/OrderCrudView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Admin.OrderCrudController">
+   <TableView fx:id="order_table_view" layoutX="29.0" layoutY="106.0" prefHeight="373.0" prefWidth="1113.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="106.0">
       <columns>
          <TableColumn fx:id="order_id_col" prefWidth="82.0" text="Order ID" />
          <TableColumn fx:id="shipper_id_col" prefWidth="97.0" text="Shipper ID" />
@@ -26,7 +27,7 @@
          <TableColumn fx:id="view_shipper_btn_col" prefWidth="107.0" text="View Shipper" />
       </columns>
    </TableView>
-   <VBox layoutX="20.0" layoutY="405.0" prefHeight="318.0" prefWidth="281.0" styleClass="info_view">
+   <VBox layoutX="20.0" layoutY="541.0" prefHeight="318.0" prefWidth="281.0" styleClass="info_view">
       <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="271.0" styleClass="shipper_info">
          <ComboBox fx:id="shipper_id_combobox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="63.0" />
          <Label fx:id="first_name_lbl" prefHeight="24.0" prefWidth="44.0" />
@@ -41,7 +42,7 @@
       <HBox prefHeight="0.0" prefWidth="359.0" />
       <HBox prefHeight="0.0" prefWidth="359.0" />
    </VBox>
-   <VBox layoutX="432.0" layoutY="365.0" prefHeight="161.0" prefWidth="281.0" styleClass="info_view">
+   <VBox layoutX="432.0" layoutY="501.0" prefHeight="161.0" prefWidth="281.0" styleClass="info_view">
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery Date:" />
       <DatePicker fx:id="date_picker" minHeight="-Infinity" minWidth="-Infinity" prefHeight="79.0" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Value:" />
@@ -52,19 +53,27 @@
       <TextField fx:id="other_details_fd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="info_text_field" />
       <HBox prefHeight="0.0" prefWidth="359.0" />
    </VBox>
-   <HBox layoutX="727.0" layoutY="392.0" prefHeight="116.0" prefWidth="404.0" styleClass="crud_nav" stylesheets="@../../Styles/OrderCrudView.css">
+   <HBox layoutX="727.0" layoutY="528.0" prefHeight="116.0" prefWidth="404.0" styleClass="crud_nav" stylesheets="@../../Styles/OrderCrudView.css">
       <Button fx:id="save_btn" mnemonicParsing="false" styleClass="save_btn" text="Save" />
       <Button fx:id="create_btn" mnemonicParsing="false" styleClass="save_btn" text="Create" />
       <Button fx:id="edit_btn" mnemonicParsing="false" styleClass="edit_btn" text="Edit" />
       <Button fx:id="delete_btn" mnemonicParsing="false" prefWidth="87.0" styleClass="delete_btn" text="Delete" />
    </HBox>
-   <Button fx:id="clear_btn" layoutX="444.0" layoutY="609.0" mnemonicParsing="false" styleClass="clear_btn">
+   <Button fx:id="clear_btn" layoutX="444.0" layoutY="763.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="33.0" prefWidth="72.0" styleClass="clear_btn" text="Clear" textFill="WHITE">
       <graphic>
-         <FontAwesomeIconView glyphName="REFRESH" size="15" />
+         <FontAwesomeIconView glyphName="REFRESH" size="16" />
       </graphic>
+      <font>
+         <Font size="15.0" />
+      </font>
    </Button>
-   <Text layoutX="34.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shipper ID" />
-   <Text layoutX="111.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" />
-   <Text layoutX="214.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
-   <FontAwesomeIconView glyphName="USER" layoutX="1011.0" layoutY="660.0" />
+   <Text layoutX="34.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shipper ID" />
+   <Text layoutX="111.0" layoutY="524.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" />
+   <Text layoutX="214.0" layoutY="524.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
+   <Text layoutX="79.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find Order:">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Text>
+   <TextField fx:id="search_fd" layoutX="163.0" layoutY="37.0" prefHeight="30.0" prefWidth="281.0" promptText="Search" styleClass="search_field" />
 </AnchorPane>

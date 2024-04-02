@@ -14,6 +14,7 @@ public class AdminMenuController implements Initializable {
     public Button all_shippers_btn;
     public Button all_orders_btn;
     public Button logout_btn;
+    public Button find_btn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

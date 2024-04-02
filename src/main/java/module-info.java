@@ -5,6 +5,7 @@ module org.doannhom7.shippermanagement {
     requires AnimateFX;
     requires de.jensd.fx.glyphs.fontawesome;
     requires java.desktop;
+    requires org.controlsfx.controls;
 
     opens org.doannhom7.shippermanagement to javafx.fxml;
     exports org.doannhom7.shippermanagement;

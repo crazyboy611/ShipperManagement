@@ -2,9 +2,12 @@ package org.doannhom7.shippermanagement.Controllers.Admin;
 
 import animatefx.animation.Shake;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -17,10 +20,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.controlsfx.control.textfield.TextFields;
 import org.doannhom7.shippermanagement.Models.Model;
 import org.doannhom7.shippermanagement.Models.Shipper;
 
@@ -29,10 +34,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
-import java.sql.Blob;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 public class ShipperCRUDController implements Initializable {
     public TableView<Shipper> shipper_table_view;
@@ -61,10 +68,13 @@ public class ShipperCRUDController implements Initializable {
     public Button upload_image_btn;
     private final ObservableList<Shipper> shippers = FXCollections.observableArrayList();
     public Label error_lbl;
+    public TextField search_field;
+    public Label shipper_id;
 
     private boolean editFlag;
     private boolean createFlag;
     private boolean deleteFlag;
+    int index = -1;
 
     public boolean getDeleteFlag() {
         return deleteFlag;
@@ -87,27 +97,13 @@ public class ShipperCRUDController implements Initializable {
     public void setEditFlag(boolean editFlag) {
         this.editFlag = editFlag;
     }
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initTable();
         setCreateFlag(true);
         setEditFlag(false);
         setDeleteFlag(true);
-        shipper_table_view.getSelectionModel().selectedItemProperty().addListener(observable -> {
-            if(getDeleteFlag()) {
-                personal_image_view.setImage(null);
-                showPersonalImage();
-                first_name_fd.setText(shipper_table_view.getSelectionModel().getSelectedItem().firstNameProperty().get());
-                last_name_fd.setText(shipper_table_view.getSelectionModel().getSelectedItem().lastNameProperty().get());
-                password_fd.setText(shipper_table_view.getSelectionModel().getSelectedItem().passwordProperty().get());
-                address_fd.setText(shipper_table_view.getSelectionModel().getSelectedItem().addressProperty().get());
-                date_picker.setValue(shipper_table_view.getSelectionModel().getSelectedItem().birthProperty().getValue());
-                phone_fd.setText(shipper_table_view.getSelectionModel().getSelectedItem().phoneProperty().get());
-                email_fd.setText(shipper_table_view.getSelectionModel().getSelectedItem().emailProperty().get());
-            }
-        });
+        getShipperSelected();
         clear_btn.setOnAction(actionEvent -> {
             setEmpty();
         });
@@ -132,7 +128,6 @@ public class ShipperCRUDController implements Initializable {
         upload_image_btn.setOnAction(actionEvent -> {
             uploadPersonalImage();
         });
-
         create_btn.setOnAction(actionEvent -> {
             if(getCreateFlag()) {
                 if(first_name_fd.getText().isEmpty()) {
@@ -237,6 +232,49 @@ public class ShipperCRUDController implements Initializable {
         personal_image_view.setFitHeight(300);
         btn_col.setCellFactory(cellFactory);
         shipper_table_view.setItems(shippers);
+
+        FilteredList<Shipper> filteredData = new FilteredList<>(shippers, b -> true);
+
+         search_field.textProperty().addListener((observableValue, oldVal, newVal) -> {
+             filteredData.setPredicate(shipper -> {
+                 if(newVal.isEmpty() || newVal.isBlank()) {
+                     return true;
+                 }
+                 String searchKeyword = newVal.toLowerCase();
+                 return shipper.firstNameProperty().toString().toLowerCase().contains(searchKeyword) ||
+                         shipper.lastNameProperty().get().toLowerCase().contains(searchKeyword) ||
+                         Integer.valueOf(shipper.shipperIdProperty().get()).toString().toLowerCase().contains(searchKeyword) ||
+                         shipper.phoneProperty().get().toLowerCase().contains(searchKeyword) ||
+                         shipper.addressProperty().get().toLowerCase().contains(searchKeyword);
+             });
+         });
+
+        SortedList<Shipper> sortedList = new SortedList<>(filteredData);
+
+        sortedList.comparatorProperty().bind(shipper_table_view.comparatorProperty());
+
+        shipper_table_view.setItems(sortedList);
+
+    }
+    private void getShipperSelected() {
+        shipper_table_view.setOnMouseClicked(event -> {
+            index = shipper_table_view.getSelectionModel().getSelectedIndex();
+            if(index <= -1) {
+                return;
+            }
+            shipper_id.setText(String.valueOf(shipper_id_col.getCellData(index)));
+            shipper_id.setVisible(false);
+            first_name_fd.setText(first_name_col.getCellData(index));
+            last_name_fd.setText(last_name_col.getCellData(index));
+            phone_fd.setText(phone_col.getCellData(index));
+            address_fd.setText(address_col.getCellData(index));
+            email_fd.setText(email_col.getCellData(index));
+            String[] date = String.valueOf(birth_col.getCellData(index)).split("-");
+            LocalDate localDate = LocalDate.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
+            date_picker.setValue(localDate);
+            password_fd.setText(password_col.getCellData(index));
+            showPersonalImage(shipper_table_view.getSelectionModel().getSelectedItem().shipperIdProperty().get());
+        });
     }
     private void onEdit() {
         if(!shipper_table_view.getSelectionModel().isEmpty()){
@@ -292,9 +330,10 @@ public class ShipperCRUDController implements Initializable {
         }
     }
     private void deleteShipper() {
-        int id = shipper_table_view.getSelectionModel().getSelectedItem().shipperIdProperty().get();
+        int id = Integer.parseInt(shipper_id.getText());
         Model.getInstance().getDatabaseDriver().deleteShipper(id);
         personal_image_view.setImage(null);
+        setEmpty();
         initTable();
     }
     private void setEmpty() {
@@ -328,12 +367,10 @@ public class ShipperCRUDController implements Initializable {
             }
         }
     }
-    private void showPersonalImage() {
-        IntegerProperty idProperty;
-        idProperty = shipper_table_view.getSelectionModel().getSelectedItem().shipperIdProperty();
+    private void showPersonalImage(int id) {
         InputStream inputStream = null;
         try{
-            inputStream = Model.getInstance().getDatabaseDriver().getPersonalImage(idProperty.get());
+            inputStream = Model.getInstance().getDatabaseDriver().getPersonalImage(id);
             if(inputStream != null){
                 Image image = new Image(inputStream, personal_image_view.getFitWidth(), personal_image_view.getFitHeight(), true, true);
                 personal_image_view.setImage(image);
