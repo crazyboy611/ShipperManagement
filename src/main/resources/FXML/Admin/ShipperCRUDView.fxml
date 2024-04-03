@@ -81,7 +81,7 @@
       </graphic>
    </Button>
    <Text layoutX="289.0" layoutY="802.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal Image" />
-   <Label fx:id="error_lbl" layoutX="551.0" layoutY="810.0" prefHeight="17.0" prefWidth="250.0" textFill="RED" />
+   <Label fx:id="error_lbl" layoutX="550.0" layoutY="822.0" prefHeight="17.0" prefWidth="250.0" textFill="RED" />
    <Text fill="RED" layoutX="297.0" layoutY="784.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*REQUIRED*" />
    <TextField fx:id="search_field" layoutX="157.0" layoutY="33.0" prefHeight="30.0" prefWidth="281.0" promptText="Search" styleClass="search_field" />
    <Text layoutX="69.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find Shipper:" wrappingWidth="81.357421875">
@@ -90,4 +90,5 @@
       </font>
    </Text>
    <Label fx:id="shipper_id" layoutX="551.0" layoutY="446.0" />
+   <Label fx:id="phone_exist_error_lbl" layoutX="550.0" layoutY="805.0" prefHeight="17.0" prefWidth="250.0" />
 </AnchorPane>

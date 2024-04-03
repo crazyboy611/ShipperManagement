@@ -38,6 +38,7 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -70,6 +71,7 @@ public class ShipperCRUDController implements Initializable {
     public Label error_lbl;
     public TextField search_field;
     public Label shipper_id;
+    public Label phone_exist_error_lbl;
 
     private boolean editFlag;
     private boolean createFlag;
@@ -121,8 +123,10 @@ public class ShipperCRUDController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirm");
                 alert.setHeaderText("Are you sure you want to delete this Shipper?");
-                alert.showAndWait();
-                deleteShipper();
+                Optional<ButtonType> buttonType = alert.showAndWait();
+                if(buttonType.get() == ButtonType.OK) {
+                    deleteShipper();
+                }
             }
         });
         upload_image_btn.setOnAction(actionEvent -> {
@@ -308,10 +312,20 @@ public class ShipperCRUDController implements Initializable {
             String email = email_fd.getText();
             String address = address_fd.getText();
             InputStream inputStream = imageToInputStream(personal_image_view.getImage());
-            Model.getInstance().getDatabaseDriver().updateShipperData(id, fName, lName,birth, phone, email, address, password, inputStream);
-            setEmpty();
-            initTable();
-    }
+            boolean exist = false;
+            for(Shipper shipper : shippers) {
+                if(phone.equals(shipper.phoneProperty().get())) {
+                    phone_exist_error_lbl.setText("This Phone has already exist!");
+                    phone_exist_error_lbl.setStyle("-fx-text-fill: red;");
+                    exist = true;
+                }
+            }
+            if(!exist) {
+                Model.getInstance().getDatabaseDriver().updateShipperData(id, fName, lName,birth, phone, email, address, password, inputStream);
+                setEmpty();
+                initTable();
+            }
+        }
     private void createShipper() {
         if(getEditFlag()){
             return;
@@ -324,9 +338,20 @@ public class ShipperCRUDController implements Initializable {
             String email = email_fd.getText();
             String address = address_fd.getText();
             InputStream image = imageToInputStream(personal_image_view.getImage());
-            Model.getInstance().getDatabaseDriver().createNewShipper(fName, lName, birth, phone, email, address, password, image);
-            setEmpty();
-            initTable();
+            boolean exist = false;
+            for(Shipper shipper : shippers) {
+                if(phone.equals(shipper.phoneProperty().get())) {
+                    phone_exist_error_lbl.setText("This Phone has already exist!");
+                    phone_exist_error_lbl.setStyle("-fx-text-fill: red;");
+                    exist = true;
+                }
+            }
+            if(!exist) {
+                Model.getInstance().getDatabaseDriver().createNewShipper(fName, lName, birth, phone, email, address, password, image);
+                setEmpty();
+                initTable();
+            }
+
         }
     }
     private void deleteShipper() {
@@ -352,6 +377,7 @@ public class ShipperCRUDController implements Initializable {
         address_fd.setText("");
         address_fd.setStyle("");
         personal_image_view.setImage(null);
+        phone_exist_error_lbl.setText("");
         initTable();
     }
     private void uploadPersonalImage() {
