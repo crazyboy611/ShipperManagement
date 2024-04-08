@@ -12,7 +12,7 @@
         <VBox layoutX="318.0" layoutY="21.0" prefHeight="595.0" prefWidth="646.0" styleClass="my_profile_info" AnchorPane.bottomAnchor="96.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Shipper ID:" />
             <Label fx:id="shipper_id_lbl" text="Label" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FIrst Name:" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" />
             <Label fx:id="first_name" text="Label" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
             <Label fx:id="last_name" text="Label" />

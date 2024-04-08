@@ -16,7 +16,7 @@ public class ShipperController implements Initializable {
         Model.getInstance().getViewFactory().getShipperSelectedMenu().addListener((observableValue, oldVal, newVal) ->{
             switch (newVal) {
                 case MY_ORDERS -> shipper_parent.setCenter(Model.getInstance().getViewFactory().getShipperOrdersView());
-                case MY_PROFILE -> shipper_parent.setCenter(Model.getInstance().getViewFactory().getShipperProfileView());
+                case STATISTICS -> shipper_parent.setCenter(Model.getInstance().getViewFactory().getShipperStatisticView());
                 default -> shipper_parent.setCenter(Model.getInstance().getViewFactory().getShipperProfileView());
             }
         } );

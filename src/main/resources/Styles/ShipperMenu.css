@@ -33,7 +33,7 @@
     -fx-fill: #F7AD1DFF;
 }
 .menu_container Button {
-    -fx-pref-width: 115;
+    -fx-pref-width: 140;
     -fx-pref-height: 40;
     -fx-background-color: white;
     -fx-text-fill: #F7AD1DFF;

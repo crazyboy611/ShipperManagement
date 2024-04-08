@@ -194,43 +194,43 @@ public class ShipperCRUDController implements Initializable {
         email_col.setCellValueFactory(new PropertyValueFactory<>("email"));
         address_col.setCellValueFactory(new PropertyValueFactory<>("address"));
         password_col.setCellValueFactory(new PropertyValueFactory<>("password"));
-        Callback<TableColumn<Shipper, String>, TableCell<Shipper, String>> cellFactory = (TableColumn<Shipper, String> param) -> {
-            return new TableCell<Shipper, String>() {
-                @Override
-                public void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                        setText(null);
+        Callback<TableColumn<Shipper, String>, TableCell<Shipper, String>> cellFactory = (TableColumn<Shipper, String> param) -> new TableCell<>() {
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
 
-                    } else {
-                        final Button viewOrders = new Button("View Orders");
-                        viewOrders.setStyle("-fx-background-color:#0066CCFF; -fx-text-fill: white;");
-                        viewOrders.setOnAction(actionEvent -> {
-                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML/Admin/ShipperOrderView.fxml"));
-                            ResultSet resultSet1 = Model.getInstance().getDatabaseDriver().getOrdersByShipperId(getTableRow().getItem().shipperIdProperty().get());
-                            String shipper_name = getTableRow().getItem().lastNameProperty().get();
-                            ShipperOrderTableViewController shipperOrderTableViewController = new ShipperOrderTableViewController(resultSet1, shipper_name);
-                            fxmlLoader.setController(shipperOrderTableViewController);
-                            Stage stage = new Stage();
-                            Scene scene;
-                            try {
-                                scene = new Scene(fxmlLoader.load());
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                            stage.setScene(scene);
-                            stage.setTitle("Shipper Information");
-                            stage.initModality(Modality.APPLICATION_MODAL);
-                            stage.setResizable(false);
-                            stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icons8-shipper-64.png"))));
-                            stage.show();
-                        });
-                        setGraphic(viewOrders);
-                        setText(null);
-                    }
-                };
-            };
+                } else {
+                    final Button viewOrders = new Button("View Orders");
+                    viewOrders.setStyle("-fx-background-color:#0066CCFF; -fx-text-fill: white; -fx-cursor: hand;");
+                    viewOrders.setOnAction(actionEvent -> {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML/Admin/ShipperOrderView.fxml"));
+                        ResultSet resultSet1 = Model.getInstance().getDatabaseDriver().getOrdersByShipperId(getTableRow().getItem().shipperIdProperty().get());
+                        String shipper_name = getTableRow().getItem().lastNameProperty().get();
+                        ShipperOrderTableViewController shipperOrderTableViewController = new ShipperOrderTableViewController(resultSet1, shipper_name);
+                        fxmlLoader.setController(shipperOrderTableViewController);
+                        Stage stage = new Stage();
+                        Scene scene;
+                        try {
+                            scene = new Scene(fxmlLoader.load());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        stage.setScene(scene);
+                        stage.setTitle("Shipper Information");
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.setResizable(false);
+                        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icons8-shipper-64.png"))));
+                        stage.show();
+                    });
+                    setGraphic(viewOrders);
+                    setText(null);
+                }
+            }
+
+            ;
         };
         personal_image_view.setFitWidth(250);
         personal_image_view.setFitHeight(300);
@@ -300,6 +300,7 @@ public class ShipperCRUDController implements Initializable {
             setDeleteFlag(false);
             setCreateFlag(false);
             setEditFlag(true);
+
         }
     }
     private void saveShipper() {
@@ -312,19 +313,27 @@ public class ShipperCRUDController implements Initializable {
             String email = email_fd.getText();
             String address = address_fd.getText();
             InputStream inputStream = imageToInputStream(personal_image_view.getImage());
-            boolean exist = false;
-            for(Shipper shipper : shippers) {
-                if(phone.equals(shipper.phoneProperty().get())) {
-                    phone_exist_error_lbl.setText("This Phone has already exist!");
-                    phone_exist_error_lbl.setStyle("-fx-text-fill: red;");
-                    exist = true;
-                }
-            }
-            if(!exist) {
-                Model.getInstance().getDatabaseDriver().updateShipperData(id, fName, lName,birth, phone, email, address, password, inputStream);
-                setEmpty();
-                initTable();
-            }
+//            boolean exist = false;
+//            for(Shipper shipper : shippers) {
+//                if(phone.equals(shipper.phoneProperty().get())) {
+//                    phone_exist_error_lbl.setText("This Phone has already exist!");
+//                    phone_exist_error_lbl.setStyle("-fx-text-fill: red;");
+//                    exist = true;
+//                }
+//            }
+//        boolean finalExist = exist;
+//        phone_fd.textProperty().addListener((observableValue, oldVal, newVal) -> {
+//                    if(newVal.equals(oldVal)) {
+                        Model.getInstance().getDatabaseDriver().updateShipperData(id, fName, lName,birth, phone, email, address, password, inputStream);
+                        setEmpty();
+                        initTable();
+//                    }
+//                    if(!finalExist) {
+//                        Model.getInstance().getDatabaseDriver().updateShipperData(id, fName, lName,birth, phone, email, address, password, inputStream);
+//                        setEmpty();
+//                        initTable();
+//                    }
+//            });
         }
     private void createShipper() {
         if(getEditFlag()){

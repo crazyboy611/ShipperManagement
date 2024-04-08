@@ -1,17 +1,27 @@
 package org.doannhom7.shippermanagement.Controllers.Shipper;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.util.Callback;
+import org.doannhom7.shippermanagement.Controllers.Admin.ShipperOrderTableViewController;
 import org.doannhom7.shippermanagement.Models.Model;
 import org.doannhom7.shippermanagement.Models.Order;
+import org.doannhom7.shippermanagement.Models.Shipper;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.time.LocalDate;
@@ -25,17 +35,20 @@ public class OrdersTableViewController implements Initializable {
     public TableColumn<Order, String> deli_date_expect_col;
     public TableColumn<Order, String> value_col;
     public TableColumn<Order, String> other_details_col;
+    public TableColumn<Order, String> note_col;
     public Label hello_label;
     public Text date_label;
-
     private final ObservableList<Order> orders = FXCollections.observableArrayList();
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        initData();
+    }
+    private void initData() {
+        initTable();
         date_label.setText("Today is " + LocalDate.now());
         hello_label.textProperty().bind(Bindings.concat("Hi, ").concat(Model.getInstance().getShipper().lastNameProperty()));
-        initTable();
     }
     private void initTable() {
         this.orders.clear();
@@ -61,5 +74,45 @@ public class OrdersTableViewController implements Initializable {
         other_details_col.setCellValueFactory(new PropertyValueFactory<>("otherDetails"));
         deli_date_expect_col.setCellValueFactory(new PropertyValueFactory<>("deliveryDateExpect"));
         my_orders_view.setItems(orders);
+        Callback<TableColumn<Order, String>, TableCell<Order, String>> cellFactory = (TableColumn<Order, String> param) -> new TableCell<>() {
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    final Button viewNote = new Button("Order Note");
+                    FontAwesomeIconView icon = new FontAwesomeIconView(FontAwesomeIcon.STICKY_NOTE_ALT);
+                    icon.setFill(Paint.valueOf("#FFFFFF"));
+                    viewNote.setGraphic(icon);
+                    viewNote.setStyle("-fx-background-color:#0099CCFF; -fx-text-fill: white; -fx-cursor: hand;");
+                    viewNote.setOnAction(actionEvent -> {
+                        int id = getTableRow().getItem().orderIdProperty().get();
+                        ResultSet resultSet = Model.getInstance().getDatabaseDriver().getOrderNote(id);
+                        ResultSet resultSet1 = Model.getInstance().getDatabaseDriver().findOrderById(id);
+                        ShipperOrderNoteController shipperOrderNoteController = new ShipperOrderNoteController(resultSet, resultSet1);
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML/Shipper/ShipperOrderNoteView.fxml"));
+                        fxmlLoader.setController(shipperOrderNoteController);
+                        Stage stage = new Stage();
+                        Scene scene;
+                        try {
+                            scene = new Scene(fxmlLoader.load());
+                        }catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        stage.setScene(scene);
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.setResizable(false);
+                        stage.setTitle("Delivery Note");
+                        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icons8-shipper-64.png"))));
+                        stage.show();
+                    });
+                    setGraphic(viewNote);
+                    setText(null);
+                }
+            }
+        };
+        note_col.setCellFactory(cellFactory);
     }
 }

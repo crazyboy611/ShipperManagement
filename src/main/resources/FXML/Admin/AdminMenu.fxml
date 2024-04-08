@@ -9,15 +9,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="865.0" prefWidth="209.0" styleClass="menu_container" stylesheets="@../../Styles/AdminMenu.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Admin.AdminMenuController">
-    <AnchorPane maxWidth="-Infinity" prefHeight="851.0" prefWidth="189.0" styleClass="menu_nav" stylesheets="@../../Styles/AdminMenu.css">
-        <VBox layoutY="30.0" prefHeight="157.0" prefWidth="188.0" styleClass="title_container">
+<VBox prefHeight="865.0" prefWidth="234.0" styleClass="menu_container" stylesheets="@../../Styles/AdminMenu.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Admin.AdminMenuController">
+    <AnchorPane maxWidth="-Infinity" prefHeight="845.0" prefWidth="218.0" styleClass="menu_nav" stylesheets="@../../Styles/AdminMenu.css">
+        <VBox layoutY="30.0" prefHeight="157.0" prefWidth="214.0" styleClass="title_container">
             <ImageView fitHeight="67.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../../Images/icons8-shipper-64.png" />
             </ImageView>
             <Label prefHeight="69.0" prefWidth="180.0" text="Shipper Management" />
         </VBox>
-        <VBox layoutX="15.0" layoutY="307.0" prefHeight="250.0" prefWidth="159.0" styleClass="menu_navigation" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+        <VBox layoutX="-2.0" layoutY="307.0" prefHeight="250.0" prefWidth="214.0" styleClass="menu_navigation" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
             <Button fx:id="all_shippers_btn" mnemonicParsing="false" prefHeight="84.0" prefWidth="148.0" text="All Shippers">
                 <graphic>
                     <FontAwesomeIconView glyphName="USERS" size="20" />

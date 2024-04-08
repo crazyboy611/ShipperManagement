@@ -9,12 +9,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.doannhom7.shippermanagement.Models.Model;
 
 public class ViewFactory {
     private AccountType accountType;
     // Shipper views
     private AnchorPane shipperProfile;
     private AnchorPane shipperOrdersView;
+    private AnchorPane shipperStatistic;
     private final ObjectProperty<ShipperMenuOptions> shipperSelectedMenu;
     //Admin Views
     private AnchorPane allShipperCrudView;
@@ -23,7 +25,7 @@ public class ViewFactory {
 
 
     public ViewFactory(){
-        this.accountType = AccountType.ADMIN;
+        this.accountType = AccountType.SHIPPER;
         this.shipperSelectedMenu = new SimpleObjectProperty<>();
         this.adminSelectedMenu = new SimpleObjectProperty<>();
     }
@@ -56,22 +58,22 @@ public class ViewFactory {
         creatStage(loader);
     }
     public AnchorPane getShipperProfileView() {
-        try{
-            if(shipperProfile == null) {
+        if(shipperProfile == null) {
+            try{
                 shipperProfile = new FXMLLoader(getClass().getResource("/FXML/Shipper/ShipperProfile.fxml")).load();
+            }catch (Exception e){
+                e.printStackTrace();
             }
-        }catch (Exception e){
-            e.printStackTrace();
         }
         return shipperProfile;
     }
     public AnchorPane getShipperOrdersView() {
-        try{
-            if(shipperOrdersView == null) {
+        if(shipperOrdersView == null) {
+            try{
                 shipperOrdersView = new FXMLLoader(getClass().getResource("/FXML/Shipper/MyOrder.fxml")).load();
+            }catch (Exception e) {
+                e.printStackTrace();
             }
-        }catch (Exception e) {
-            e.printStackTrace();
         }
         return shipperOrdersView;
     }
@@ -84,24 +86,35 @@ public class ViewFactory {
         creatStage(loader);
     }
     public AnchorPane getAllShipperView() {
-        try{
-            if(allShipperCrudView == null) {
+        if(allShipperCrudView == null) {
+            try {
                 allShipperCrudView = new FXMLLoader(getClass().getResource("/FXML/Admin/ShipperCrudView.fxml")).load();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }catch (Exception e){
-            e.printStackTrace();
         }
         return allShipperCrudView;
     }
     public AnchorPane getAllOrdersCrudView() {
-        try{
-            if(allOrdersCrudView == null) {
+        if(allOrdersCrudView == null) {
+            try {
                 allOrdersCrudView = new FXMLLoader(getClass().getResource("/FXML/Admin/OrderCrudView.fxml")).load();
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }catch (Exception e){
-            e.printStackTrace();
         }
         return allOrdersCrudView;
+    }
+    public AnchorPane getShipperStatisticView() {
+        if(shipperStatistic == null) {
+            try {
+                shipperStatistic = new FXMLLoader(getClass().getResource("/FXML/Shipper/StatisticOrder.fxml")).load();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return shipperStatistic;
     }
 
     private void creatStage(FXMLLoader loader) {

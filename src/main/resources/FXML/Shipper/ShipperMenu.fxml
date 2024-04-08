@@ -10,19 +10,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="214.0" styleClass="main_menu_container" stylesheets="@../../Styles/ShipperMenu.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Shipper.ShipperMenuController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="269.0" styleClass="main_menu_container" stylesheets="@../../Styles/ShipperMenu.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Shipper.ShipperMenuController">
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
-   <AnchorPane prefHeight="813.0" prefWidth="200.0" styleClass="left_container">
-      <VBox layoutY="24.0" prefHeight="157.0" prefWidth="200.0" styleClass="title_container">
+   <AnchorPane prefHeight="720.0" prefWidth="247.0" styleClass="left_container">
+      <VBox layoutY="24.0" prefHeight="157.0" prefWidth="249.0" styleClass="title_container">
          <ImageView fitHeight="67.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../Images/icons8-shipper-64.png" />
          </ImageView>
          <Label prefHeight="69.0" prefWidth="180.0" text="Shipper Management" />
       </VBox>
-      <VBox alignment="TOP_CENTER" layoutY="198.0" prefHeight="343.0" prefWidth="200.0" styleClass="menu_container" AnchorPane.topAnchor="198.0">
-         <Button id="profile" fx:id="profile_btn" mnemonicParsing="false" text="Profile">
+      <VBox alignment="TOP_CENTER" layoutY="198.0" prefHeight="343.0" prefWidth="249.0" styleClass="menu_container" AnchorPane.topAnchor="198.0">
+         <Button id="profile" fx:id="profile_btn" mnemonicParsing="false" prefWidth="142.0" text="Profile">
             <graphic>
                <FontAwesomeIconView glyphName="USER" size="20" text="" />
             </graphic>
@@ -30,6 +30,11 @@
          <Button fx:id="my_orders_btn" mnemonicParsing="false" text="My Orders">
             <graphic>
                <FontAwesomeIconView glyphName="LIST" size="20" />
+            </graphic>
+         </Button>
+         <Button fx:id="statistic_btn" mnemonicParsing="false" text="Statistic">
+            <graphic>
+               <FontAwesomeIconView glyphName="AREA_CHART" size="20" />
             </graphic>
          </Button>
          <Button fx:id="logout_btn" mnemonicParsing="false" styleClass="alt_btn" text="Logout">

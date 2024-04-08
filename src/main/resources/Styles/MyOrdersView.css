@@ -7,3 +7,25 @@
 .title {
     -fx-font-size: 1.8em;
 }
+.table-view{
+    -fx-background-color:transparent;
+    -fx-border-color:linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #ee2610ff 0.0%, #f7ad1dff 100.0%);
+    -fx-border-radius:8px;
+    -fx-padding:0px;
+}
+.table-view .table-column{
+    -fx-alignment:CENTER;
+}
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #ee2610ff 0.0%, #f7ad1dff 100.0%);
+    -fx-background-insets: 0 0 0 0;
+    -f-background-radius:8px 8px 0px 0px;
+}
+.table-view .column-header, .filter{
+    -fx-background-color: transparent;
+    -fx-size:40px;
+}
+.table-view .column-header .label{
+    -fx-text-fill:#fff;
+    -fx-font-family:"Arial";
+}

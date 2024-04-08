@@ -1,6 +1,7 @@
 package org.doannhom7.shippermanagement.Models;
 
 import javafx.beans.property.*;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 
@@ -72,5 +73,10 @@ public class Shipper {
     }
     public StringProperty passwordProperty() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(shipperIdProperty().get());
     }
 }

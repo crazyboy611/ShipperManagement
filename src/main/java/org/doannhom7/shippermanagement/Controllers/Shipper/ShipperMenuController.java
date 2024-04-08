@@ -15,11 +15,16 @@ public class ShipperMenuController implements Initializable {
     public Button profile_btn;
     public Button logout_btn;
     public Button report_btn;
+    public Button statistic_btn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        addListener();
+    }
+    public void addListener() {
         profile_btn.setOnAction(actionEvent -> onShipperProfile());
         my_orders_btn.setOnAction(actionEvent -> onShipperOrder());
+        statistic_btn.setOnAction(actionEvent -> onOrderStatistic());
         logout_btn.setOnAction(actionEvent -> onLogout());
     }
     private void onShipperProfile() {
@@ -28,12 +33,14 @@ public class ShipperMenuController implements Initializable {
     private void onShipperOrder() {
         Model.getInstance().getViewFactory().getShipperSelectedMenu().set(ShipperMenuOptions.MY_ORDERS);
     }
+    private void onOrderStatistic() {
+        Model.getInstance().getViewFactory().getShipperSelectedMenu().set(ShipperMenuOptions.STATISTICS);
+    }
     private void onLogout() {
-        Stage stage = (Stage) report_btn.getScene().getWindow();
+        Stage stage = (Stage) statistic_btn.getScene().getWindow();
         Model.getInstance().getViewFactory().closeStage(stage);
         Model.getInstance().setAdminLoginSuccessFlag(false);
         Model.getInstance().setShipperLoginSuccessFlag(false);
-        Model.getInstance().getViewFactory().setAccountType(AccountType.ADMIN);
         Model.getInstance().getViewFactory().showLoginWindow();
     }
 }

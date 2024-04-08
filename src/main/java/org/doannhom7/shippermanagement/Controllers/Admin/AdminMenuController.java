@@ -33,7 +33,6 @@ public class AdminMenuController implements Initializable {
         Model.getInstance().getViewFactory().closeStage(stage);
         Model.getInstance().setAdminLoginSuccessFlag(false);
         Model.getInstance().setShipperLoginSuccessFlag(false);
-        Model.getInstance().getViewFactory().setAccountType(AccountType.ADMIN);
         Model.getInstance().getViewFactory().showLoginWindow();
     }
 }

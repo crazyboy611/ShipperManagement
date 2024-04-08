@@ -119,9 +119,6 @@ public class OrderCrudController implements Initializable {
                 }else if(value_fd.getText().isEmpty()) {
                     value_fd.setStyle("-fx-border-color: red; -fx-border-width: 2");
                     new Shake(value_fd).play();
-                }else if(other_details_fd.getText().isEmpty()) {
-                    other_details_fd.setStyle("-fx-border-color: red; -fx-border-width: 2");
-                    new Shake(other_details_fd).play();
                 }else{
                     createOrder();
                 }
@@ -157,50 +154,49 @@ public class OrderCrudController implements Initializable {
         value_col.setCellValueFactory(new PropertyValueFactory<>("value"));
         deli_date_expect_col.setCellValueFactory(new PropertyValueFactory<>("deliveryDateExpect"));
         other_details_col.setCellValueFactory(new PropertyValueFactory<>("otherDetails"));
-        Callback<TableColumn<Order, String>, TableCell<Order, String>> cellFactory = (TableColumn<Order, String> param) -> {
-            return new TableCell<Order, String>() {
-                @Override
-                public void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                        setText(null);
-
+        Callback<TableColumn<Order, String>, TableCell<Order, String>> cellFactory = (TableColumn<Order, String> param) -> new TableCell<>() {
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    FontAwesomeIconView icon = new FontAwesomeIconView(FontAwesomeIcon.USER);
+                    icon.setFill(Paint.valueOf("#FFFFFF"));
+                    final Button viewShipper = new Button();
+                    viewShipper.setGraphic(icon);
+                    viewShipper.setStyle("-fx-background-color:#0099CCFF; -fx-text-fill: white; -fx-cursor: hand;");
+                    if (getTableRow().getItem().shipperIdProperty().get() == 0) {
+                        viewShipper.setDisable(true);
                     } else {
-                        FontAwesomeIconView icon = new FontAwesomeIconView(FontAwesomeIcon.USER);
-                        icon.setFill(Paint.valueOf("#FFFFFF"));
-                        final Button viewShipper = new Button();
-                        viewShipper.setGraphic(icon);
-                        viewShipper.setStyle("-fx-background-color:#0099CCFF; -fx-text-fill: white;");
-                        if(getTableRow().getItem().shipperIdProperty().get() == 0){
-                            viewShipper.setDisable(true);
-                        }else {
-                            viewShipper.setDisable(false);
-                            viewShipper.setOnAction(actionEvent -> {
-                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML/Admin/ShipperInfoView.fxml"));
-                                ResultSet resultSet1 = Model.getInstance().getDatabaseDriver().findShipperById(getTableRow().getItem().shipperIdProperty().get());
-                                ShipperInfoViewController shipperOrderTableViewController = new ShipperInfoViewController(resultSet1);
-                                fxmlLoader.setController(shipperOrderTableViewController);
-                                Stage stage = new Stage();
-                                Scene scene;
-                                try {
-                                    scene = new Scene(fxmlLoader.load());
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                stage.setScene(scene);
-                                stage.initModality(Modality.APPLICATION_MODAL);
-                                stage.setResizable(false);
-                                stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icons8-shipper-64.png"))));
-                                stage.show();
-                            });
-                        }
-
-                        setGraphic(viewShipper);
-                        setText(null);
+                        viewShipper.setDisable(false);
+                        viewShipper.setOnAction(actionEvent -> {
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML/Admin/ShipperInfoView.fxml"));
+                            ResultSet resultSet1 = Model.getInstance().getDatabaseDriver().findShipperById(getTableRow().getItem().shipperIdProperty().get());
+                            ShipperInfoViewController shipperOrderTableViewController = new ShipperInfoViewController(resultSet1);
+                            fxmlLoader.setController(shipperOrderTableViewController);
+                            Stage stage = new Stage();
+                            Scene scene;
+                            try {
+                                scene = new Scene(fxmlLoader.load());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                            stage.setScene(scene);
+                            stage.initModality(Modality.APPLICATION_MODAL);
+                            stage.setResizable(false);
+                            stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icons8-shipper-64.png"))));
+                            stage.show();
+                        });
                     }
-                };
-            };
+
+                    setGraphic(viewShipper);
+                    setText(null);
+                }
+            }
+
+            ;
         };
         view_shipper_btn_col.setCellFactory(cellFactory);
         order_table_view.setItems(orders);
@@ -221,11 +217,7 @@ public class OrderCrudController implements Initializable {
                     return true;
                 }else if(predicateOrder.valueProperty().getValue().toString().toLowerCase().contains(searchKeyword)) {
                     return true;
-                }else if(predicateOrder.deliveryDateExpectProperty().get().toString().contains(searchKeyword)){
-                    return true;
-                }else{
-                    return false;
-                }
+                }else return predicateOrder.deliveryDateExpectProperty().get().toString().contains(searchKeyword);
             });
         });
 
@@ -311,7 +303,8 @@ public class OrderCrudController implements Initializable {
             String date = date_picker.getValue().toString();
             String other_details = other_details_fd.getText();
             Double value = Double.parseDouble(value_fd.getText());
-            Model.getInstance().getDatabaseDriver().createOrder(shipper_id, pickup_location, delivery_location, value, other_details, date);
+            int order_id = Model.getInstance().getDatabaseDriver().createOrder(shipper_id, pickup_location, delivery_location, value, other_details, date);
+            Model.getInstance().getDatabaseDriver().createDeliveryNote(order_id,0, "Not Delivery", "");
             setEmpty();
             initTable();
         }

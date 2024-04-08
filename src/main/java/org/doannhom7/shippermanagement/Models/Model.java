@@ -13,10 +13,7 @@ public class Model {
     // Client data section
     private final Shipper shipper;
     private boolean shipperLoginSuccessFlag;
-//    private final ObservableList<Client> clients;
-//    private final ObservableList<Transaction> allTransaction;
-//    private final ObservableList<Transaction> latestTransaction;
-    // Admin data section
+
     private final Admin admin;
     private boolean adminLoginSuccessFlag;
     private Model() {
@@ -26,7 +23,6 @@ public class Model {
         this.adminLoginSuccessFlag = false;
         this.shipper = new Shipper(0,"","",null,"", "", "", "");
         this.admin = new Admin("");
-//        this.clients = FXCollections.observableArrayList();
     }
 
     public boolean getShipperLoginSuccessFlag() {

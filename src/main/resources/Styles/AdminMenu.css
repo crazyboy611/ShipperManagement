@@ -30,7 +30,7 @@
 .menu_navigation Button {
     -fx-background-color: white;
     -fx-effect: dropshadow(two-pass-box, #AAAAAA, 5, 0, 0, 5);
-    -fx-pref-width: 125;
+    -fx-pref-width: 140;
     -fx-pref-height: 40;
     -fx-text-fill: #F7AD1DFF;
     -fx-font-size: 1.3em;

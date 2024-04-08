@@ -162,11 +162,12 @@ public class DatabaseDriver {
             e.printStackTrace();
         }
     }
-    public void createOrder(int shipper_id, String pickup_location, String delivery_location, Double value, String other_details, String delivery_date_expect) {
+    public int createOrder(int shipper_id, String pickup_location, String delivery_location, Double value, String other_details, String delivery_date_expect) {
         PreparedStatement preparedStatement;
         String query = "INSERT INTO shippermanagement.orders(shipper_id, pickup_location, delivery_location, value, other_details, delivery_date_expect) VALUES (?, ?, ?, ?, ?, ?)";
+        int order_id = -1;
         try {
-            preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement = this.connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1,shipper_id);
             preparedStatement.setString(2, pickup_location);
             preparedStatement.setString(3,delivery_location);
@@ -174,9 +175,16 @@ public class DatabaseDriver {
             preparedStatement.setString(5, other_details);
             preparedStatement.setString(6, delivery_date_expect);
             preparedStatement.executeUpdate();
+
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if(resultSet.next()) {
+                order_id = resultSet.getInt(1);
+            }
         }catch (SQLException e) {
             e.printStackTrace();
         }
+        return order_id;
+
     }
     public ResultSet findShipperById(int id) {
         PreparedStatement preparedStatement;
@@ -197,7 +205,74 @@ public class DatabaseDriver {
         try{
             preparedStatement = this.connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
+            deleteDeliveryNote(id);
             preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public ResultSet getOrderNote(int id) {
+        PreparedStatement preparedStatement;
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM shippermanagement.delivery_note WHERE order_id=?";
+        try{
+            preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+    public void updateOrderNote(int delivery_number, String status, String delivery_date, int id) {
+        PreparedStatement preparedStatement;
+        String query = "UPDATE shippermanagement.delivery_note SET delivery_number=?, delivery_status=?, delivery_date=? where order_id=?";
+        try {
+            preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement.setInt(1, delivery_number);
+            preparedStatement.setString(2, status);
+            preparedStatement.setString(3, delivery_date);
+            preparedStatement.setInt(4, id);
+            preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void createDeliveryNote(int order_id, int delivery_number, String delivery_status, String delivery_date) {
+        PreparedStatement preparedStatement;
+        String query = "INSERT INTO shippermanagement.delivery_note(order_id, delivery_number, delivery_status, delivery_date) VALUES ( ?,?,?,? )";
+        try {
+            preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement.setInt(1, order_id);
+            preparedStatement.setInt(2, delivery_number);
+            preparedStatement.setString(3, delivery_status);
+            preparedStatement.setString(4, delivery_date);
+            preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public ResultSet findOrderById(int order_id) {
+        PreparedStatement preparedStatement;
+        String query = "SELECT * FROM shippermanagement.orders WHERE order_id = ?";
+        ResultSet resultSet = null;
+        try{
+            preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement.setInt(1, order_id);
+            resultSet = preparedStatement.executeQuery();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+    public void deleteDeliveryNote(int order_id) {
+        PreparedStatement deleteStatement;
+        String query1 = "DELETE FROM shippermanagement.delivery_note WHERE order_id=?";
+        try{
+            deleteStatement = this.connection.prepareStatement(query1);
+            deleteStatement.setInt(1, order_id);
+            deleteStatement.executeUpdate();
+            deleteOrder(order_id);
         }catch (SQLException e) {
             e.printStackTrace();
         }

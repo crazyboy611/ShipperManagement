@@ -1,0 +1,43 @@
+VBox {
+    -fx-spacing: 10;
+    -fx-padding: 10 0 0 10 ;
+}
+HBox {
+    -fx-alignment: center;
+    -fx-spacing: 10;
+    -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #ee2610ff 0.0%, #f7ad1dff 100.0%);
+    -fx-background-radius: 10 10 0 0 ;
+}
+HBox FontAwesomeIconView {
+    -fx-fill: white;
+}
+.title {
+    -fx-font-size: 2em;
+    -fx-fill: white;
+    -fx-font-family: Arial;
+}
+Label {
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+Text {
+    -fx-fill: #888888;
+    -fx-font-size: 1.2em;
+}
+.container {
+    -fx-background-color: #dddddd;
+}
+.info_container {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(two-pass-box, #AAAAAA, 5, 0, 0, 5);
+    -fx-background-radius: 10;
+}
+.shipper_view_button {
+    -fx-background-color: #0099CCFF;
+}
+.shipper_view_button FontAwesomeIconView{
+    -fx-fill: white;
+}
+.status_lbl {
+    -fx-alignment: center;
+}

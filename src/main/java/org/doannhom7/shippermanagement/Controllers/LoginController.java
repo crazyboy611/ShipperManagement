@@ -29,24 +29,21 @@ public class LoginController implements Initializable {
         login_btn.setOnAction(actionEvent -> onLogin());
     }
 
-    public ChoiceBox<AccountType> getAcc_selector() {
-        return acc_selector;
-    }
     private void setAcc_selector() {
         Model.getInstance().getViewFactory().setAccountType(acc_selector.getValue());
-        if(acc_selector.getValue() == AccountType.ADMIN) {
-            shipper_phone.setText("Username: ");
-        }else{
+        if(acc_selector.getValue() == AccountType.SHIPPER) {
             shipper_phone.setText("Phone: ");
+        }else{
+            shipper_phone.setText("Username: ");
         }
     }
     private void onLogin() {
         Stage stage = (Stage) error_label.getScene().getWindow();
-//        Model.getInstance().getViewFactory().showClientWindow();
         if (Model.getInstance().getViewFactory().getAccountType() == AccountType.SHIPPER) {
             Model.getInstance().evaluateShipperCred(shipper_phone_field.getText(), password_field.getText());
             if(Model.getInstance().getShipperLoginSuccessFlag()){
                 Model.getInstance().getViewFactory().showShipperWindow();
+                System.out.println(Model.getInstance().getShipper().toString());
                 Model.getInstance().getViewFactory().closeStage(stage);
             }else{
                 shipper_phone_field.setText("");
