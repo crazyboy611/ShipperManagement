@@ -1,7 +1,7 @@
-
 create table if not exists admins
 (
-    id int auto_increment primary key,
+    id       int auto_increment
+        primary key,
     username varchar(20) not null,
     password varchar(20) not null
 );
@@ -17,9 +17,7 @@ create table if not exists shippers
     birthDay       varchar(20)  not null,
     email          varchar(255) not null,
     address        varchar(255) null,
-    personal_image longblob     null,
-    constraint phone_UNIQUE
-        unique (phone)
+    personal_image longblob     null
 );
 
 create table if not exists orders
@@ -36,7 +34,14 @@ create table if not exists orders
         foreign key (shipper_id) references shippers (shipper_id)
 );
 
-create index shipper_id
-    on orders (shipper_id);
-
-
+create table if not exists delivery_note
+(
+    delivery_id     int auto_increment
+        primary key,
+    order_id        int                                null,
+    delivery_number int                                null,
+    delivery_status enum ('Delivered', 'Not Delivery') null,
+    delivery_date   varchar(20)                        null,
+    constraint delivery_note_ibfk_2
+        foreign key (order_id) references orders (order_id)
+);
