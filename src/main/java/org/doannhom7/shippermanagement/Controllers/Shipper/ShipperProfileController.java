@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.doannhom7.shippermanagement.Models.Model;
 import org.doannhom7.shippermanagement.Models.Shipper;
+import org.doannhom7.shippermanagement.Views.ShipperMenuOptions;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -24,8 +25,15 @@ public class ShipperProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initData();
+        Model.getInstance().getViewFactory().getShipperSelectedMenu().addListener((observable, oldValue, newValue) -> {
+            if (newValue == ShipperMenuOptions.MY_PROFILE) {
+                initData();
+            }
+        });
     }
     private void initData() {
+        Shipper shipper = Model.getInstance().getShipper();
+
         shipper_id_lbl.textProperty().bind(Model.getInstance().getShipper().shipperIdProperty().asString());
         first_name.textProperty().bind(Model.getInstance().getShipper().firstNameProperty());
         last_name.textProperty().bind(Model.getInstance().getShipper().lastNameProperty());
@@ -33,8 +41,9 @@ public class ShipperProfileController implements Initializable {
         birth_lbl.textProperty().bind(Model.getInstance().getShipper().birthProperty().asString());
         email_lbl.textProperty().bind(Model.getInstance().getShipper().emailProperty());
         address_lbl.textProperty().bind(Model.getInstance().getShipper().addressProperty());
-        InputStream inputStream = Model.getInstance().getDatabaseDriver().getPersonalImage(Model.getInstance().getShipper().shipperIdProperty().get());
-        Image image = new Image(inputStream);
-        shipper_image.setImage(image);
+
+        InputStream inputStream = Model.getInstance().getDatabaseDriver().getPersonalImage(shipper.shipperIdProperty().get());
+
+        shipper_image.setImage(new Image(inputStream));
     }
 }
