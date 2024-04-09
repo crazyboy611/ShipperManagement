@@ -20,7 +20,6 @@ import java.util.ResourceBundle;
 
 public class ShipperOrderNoteController implements Initializable {
     public Label order_id;
-//    public Button shipper_info_btn;
     public Button confirm_btn;
     public Button close_btn;
     public Label number_of_deliveries;
@@ -31,6 +30,7 @@ public class ShipperOrderNoteController implements Initializable {
     public RadioButton not_delivery;
     public RadioButton delivered;
     public ResultSet deliveryNote;
+
     public ResultSet order;
     public ShipperOrderNoteController(ResultSet deliveryNote, ResultSet order) {
         this.deliveryNote = deliveryNote;

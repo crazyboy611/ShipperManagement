@@ -16,10 +16,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import org.doannhom7.shippermanagement.Controllers.Admin.ShipperOrderTableViewController;
 import org.doannhom7.shippermanagement.Models.Model;
 import org.doannhom7.shippermanagement.Models.Order;
-import org.doannhom7.shippermanagement.Models.Shipper;
+import org.doannhom7.shippermanagement.Views.ShipperMenuOptions;
 
 import java.io.IOException;
 import java.net.URL;
@@ -38,19 +37,23 @@ public class OrdersTableViewController implements Initializable {
     public TableColumn<Order, String> note_col;
     public Label hello_label;
     public Text date_label;
-    private final ObservableList<Order> orders = FXCollections.observableArrayList();
-
+    ObservableList<Order> orders = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initData();
+        Model.getInstance().getViewFactory().getShipperSelectedMenu().addListener((observable, oldValue, newValue) -> {
+            if (newValue == ShipperMenuOptions.MY_ORDERS) {
+               initTable();
+            }
+        });
     }
     private void initData() {
         initTable();
         date_label.setText("Today is " + LocalDate.now());
         hello_label.textProperty().bind(Bindings.concat("Hi, ").concat(Model.getInstance().getShipper().lastNameProperty()));
     }
-    private void initTable() {
+    public void initTable() {
         this.orders.clear();
         ResultSet resultSet = Model.getInstance().getDatabaseDriver().getOrdersByShipperId(Model.getInstance().getShipper().shipperIdProperty().get());
         try{
@@ -73,7 +76,6 @@ public class OrdersTableViewController implements Initializable {
         value_col.setCellValueFactory(new PropertyValueFactory<>("value"));
         other_details_col.setCellValueFactory(new PropertyValueFactory<>("otherDetails"));
         deli_date_expect_col.setCellValueFactory(new PropertyValueFactory<>("deliveryDateExpect"));
-        my_orders_view.setItems(orders);
         Callback<TableColumn<Order, String>, TableCell<Order, String>> cellFactory = (TableColumn<Order, String> param) -> new TableCell<>() {
             @Override
             public void updateItem(String item, boolean empty) {
@@ -114,5 +116,6 @@ public class OrdersTableViewController implements Initializable {
             }
         };
         note_col.setCellFactory(cellFactory);
+        my_orders_view.setItems(orders);
     }
 }

@@ -3,6 +3,7 @@ package org.doannhom7.shippermanagement.Controllers.Shipper;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import org.controlsfx.control.PropertySheet;
 import org.doannhom7.shippermanagement.Views.AccountType;
 import org.doannhom7.shippermanagement.Models.Model;
 import org.doannhom7.shippermanagement.Views.ShipperMenuOptions;
@@ -39,6 +40,7 @@ public class ShipperMenuController implements Initializable {
     private void onLogout() {
         Stage stage = (Stage) statistic_btn.getScene().getWindow();
         Model.getInstance().getViewFactory().closeStage(stage);
+        Model.getInstance().getViewFactory().getShipperSelectedMenu().set(ShipperMenuOptions.MY_PROFILE);
         Model.getInstance().setAdminLoginSuccessFlag(false);
         Model.getInstance().setShipperLoginSuccessFlag(false);
         Model.getInstance().getViewFactory().showLoginWindow();
