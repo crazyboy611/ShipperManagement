@@ -9,10 +9,12 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -163,10 +165,15 @@ public class OrderCrudController implements Initializable {
                     setText(null);
                 } else {
                     FontAwesomeIconView icon = new FontAwesomeIconView(FontAwesomeIcon.USER);
+                    FontAwesomeIconView icon1 = new FontAwesomeIconView(FontAwesomeIcon.STICKY_NOTE_ALT);
+                    icon1.setFill(Paint.valueOf("#FFFFFF"));
                     icon.setFill(Paint.valueOf("#FFFFFF"));
                     final Button viewShipper = new Button();
                     viewShipper.setGraphic(icon);
                     viewShipper.setStyle("-fx-background-color:#0099CCFF; -fx-text-fill: white; -fx-cursor: hand;");
+                    final Button viewNote = new Button();
+                    viewNote.setGraphic(icon1);
+                    viewNote.setStyle("-fx-background-color:#F7AD1DFF; -fx-text-fill: white; -fx-cursor: hand;");
                     if (getTableRow().getItem().shipperIdProperty().get() == 0) {
                         viewShipper.setDisable(true);
                     } else {
@@ -190,8 +197,30 @@ public class OrderCrudController implements Initializable {
                             stage.show();
                         });
                     }
-
-                    setGraphic(viewShipper);
+                    viewNote.setOnAction(actionEvent -> {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML/Admin/OrderNoteView.fxml"));
+                        ResultSet resultSet = Model.getInstance().getDatabaseDriver().getOrderNote(getTableRow().getItem().orderIdProperty().get());
+                        ResultSet resultSet1 = Model.getInstance().getDatabaseDriver().findOrderById(getTableRow().getItem().orderIdProperty().get());
+                        OrderNoteController orderNoteController = new OrderNoteController(resultSet, resultSet1);
+                        fxmlLoader.setController(orderNoteController);
+                        Stage stage = new Stage();
+                        Scene scene;
+                        try {
+                            scene = new Scene(fxmlLoader.load());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        stage.setScene(scene);
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.setResizable(false);
+                        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icons8-shipper-64.png"))));
+                        stage.show();
+                    });
+//                    viewNote.setTranslateX();
+                    HBox buttonsContainer = new HBox(viewShipper, viewNote);
+                    buttonsContainer.setAlignment(Pos.CENTER);
+                    buttonsContainer.setSpacing(10);
+                    setGraphic(buttonsContainer);
                     setText(null);
                 }
             }

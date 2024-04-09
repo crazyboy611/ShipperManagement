@@ -24,7 +24,7 @@
          <TableColumn fx:id="deli_date_expect_col" prefWidth="172.0" text="Delivery Date Expect" />
          <TableColumn fx:id="value_col" prefWidth="133.0" text="Value" />
          <TableColumn fx:id="other_details_col" minWidth="0.0" prefWidth="139.0" text="Other Details" />
-         <TableColumn fx:id="view_shipper_btn_col" prefWidth="107.0" text="View Shipper" />
+         <TableColumn fx:id="view_shipper_btn_col" prefWidth="107.0" text="Utility" />
       </columns>
    </TableView>
    <VBox layoutX="20.0" layoutY="541.0" prefHeight="318.0" prefWidth="281.0" styleClass="info_view">

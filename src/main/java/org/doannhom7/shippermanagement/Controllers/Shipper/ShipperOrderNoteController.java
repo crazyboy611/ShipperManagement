@@ -72,9 +72,6 @@ public class ShipperOrderNoteController implements Initializable {
             Stage stage = (Stage) order_id.getScene().getWindow();
             stage.close();
         });
-//        shipper_info_btn.setOnAction(actionEvent -> {
-//            showShipperInfo();
-//        });
     }
     private void init() {
         try{
