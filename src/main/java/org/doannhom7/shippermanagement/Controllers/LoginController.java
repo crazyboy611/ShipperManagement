@@ -43,7 +43,6 @@ public class LoginController implements Initializable {
             Model.getInstance().evaluateShipperCred(shipper_phone_field.getText(), password_field.getText());
             if(Model.getInstance().getShipperLoginSuccessFlag()){
                 Model.getInstance().getViewFactory().showShipperWindow();
-                System.out.println(Model.getInstance().getShipper().toString());
                 Model.getInstance().getViewFactory().closeStage(stage);
             }else{
                 shipper_phone_field.setText("");

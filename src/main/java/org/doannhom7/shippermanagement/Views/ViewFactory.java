@@ -21,6 +21,7 @@ public class ViewFactory {
     //Admin Views
     private AnchorPane allShipperCrudView;
     private AnchorPane allOrdersCrudView;
+    private AnchorPane adminStatistic;
     private final ObjectProperty<AdminMenuOptions> adminSelectedMenu;
 
 
@@ -115,6 +116,16 @@ public class ViewFactory {
             }
         }
         return shipperStatistic;
+    }
+    public AnchorPane getAdminStatisticView() {
+        if(adminStatistic == null) {
+            try {
+                adminStatistic = new FXMLLoader(getClass().getResource("/FXML/Admin/AdminStatistic.fxml")).load();
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return adminStatistic;
     }
 
     private void creatStage(FXMLLoader loader) {

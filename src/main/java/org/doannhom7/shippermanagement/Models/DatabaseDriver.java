@@ -267,14 +267,56 @@ public class DatabaseDriver {
     }
     public void deleteDeliveryNote(int order_id) {
         PreparedStatement deleteStatement;
+        PreparedStatement removeOrderId;
         String query1 = "DELETE FROM shippermanagement.delivery_note WHERE order_id=?";
+        String query2 = "DELETE FROM shippermanagement.orders WHERE order_id = ?";
         try{
             deleteStatement = this.connection.prepareStatement(query1);
+            removeOrderId = this.connection.prepareStatement(query2);
             deleteStatement.setInt(1, order_id);
             deleteStatement.executeUpdate();
-            deleteOrder(order_id);
+            removeOrderId.setInt(1,order_id);
+            removeOrderId.executeUpdate();
         }catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public ResultSet getShipperOrderStatistic(int shipper_id) {
+        PreparedStatement preparedStatement;
+        ResultSet resultSet = null;
+        String query = "SELECT LEFT(delivery_date, 7) AS YearMonth, sum(value), COUNT(o.order_id) " +
+                "FROM shippermanagement.delivery_note " +
+                "RIGHT JOIN shippermanagement.orders o on delivery_note.order_id = o.order_id " +
+                "RIGHT JOIN shippermanagement.shippers s on s.shipper_id = o.shipper_id " +
+                "WHERE o.shipper_id = ? and shippermanagement.delivery_note.delivery_status ='Delivered' " +
+                "GROUP BY YearMonth " +
+                "ORDER BY YearMonth " +
+                "LIMIT 8";
+        try{
+            preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement.setInt(1, shipper_id);
+            resultSet = preparedStatement.executeQuery();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+    public ResultSet getAdminOrderStatistic() {
+        PreparedStatement preparedStatement;
+        ResultSet resultSet = null;
+        String query = "SELECT LEFT(delivery_date, 7) AS YearMonth, sum(value), COUNT(o.order_id) " +
+                "FROM shippermanagement.delivery_note " +
+                "RIGHT JOIN shippermanagement.orders o on delivery_note.order_id = o.order_id " +
+                "WHERE delivery_status = 'Delivered' " +
+                "GROUP BY YearMonth " +
+                "ORDER BY YearMonth " +
+                "LIMIT 8";
+        try {
+            preparedStatement = this.connection.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+        }catch (SQLException e ) {
+            e.printStackTrace();
+        }
+        return resultSet;
     }
 }

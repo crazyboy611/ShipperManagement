@@ -1,18 +1,12 @@
 package org.doannhom7.shippermanagement.Controllers.Shipper;
 
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.image.Image;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.doannhom7.shippermanagement.Controllers.Admin.ShipperInfoViewController;
 import org.doannhom7.shippermanagement.Models.Model;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.time.LocalDate;
@@ -24,9 +18,7 @@ public class ShipperOrderNoteController implements Initializable {
     public Button close_btn;
     public Label number_of_deliveries;
     public Label date_delivery_expect_lbl;
-
     public Label status_lbl;
-
     public RadioButton not_delivery;
     public RadioButton delivered;
     public ResultSet deliveryNote;
@@ -37,7 +29,6 @@ public class ShipperOrderNoteController implements Initializable {
         this.order = order;
 
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         init();
@@ -48,7 +39,7 @@ public class ShipperOrderNoteController implements Initializable {
                 String notDelivery = not_delivery.textProperty().get();
                 int num = Integer.parseInt(number_of_deliveries.getText());
                 num++;
-                if(num >= 4) {
+                if(num >= 3) {
                     Model.getInstance().getDatabaseDriver().deleteDeliveryNote(orderId);
                 }else{
                     Model.getInstance().getDatabaseDriver().updateOrderNote(num, notDelivery, "", orderId);
@@ -101,22 +92,4 @@ public class ShipperOrderNoteController implements Initializable {
             e.printStackTrace();
         }
     }
-//    private void showShipperInfo() {
-//        ResultSet resultSet1 = Model.getInstance().getDatabaseDriver().findShipperById(Model.getInstance().getShipper().shipperIdProperty().get());
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML/Admin/ShipperInfoView.fxml"));
-//        ShipperInfoViewController shipperInfoViewController = new ShipperInfoViewController(resultSet1);
-//        fxmlLoader.setController(shipperInfoViewController);
-//        Stage stage = new Stage();
-//        Scene scene;
-//        try {
-//            scene = new Scene(fxmlLoader.load());
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        stage.setScene(scene);
-//        stage.initModality(Modality.APPLICATION_MODAL);
-//        stage.setResizable(false);
-//        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icons8-shipper-64.png"))));
-//        stage.show();
-//    }
 }

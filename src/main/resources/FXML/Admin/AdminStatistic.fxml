@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1229.0" stylesheets="@../../Styles/ShipperStatistic.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Shipper.ShipperStatistic">
-    <BarChart fx:id="shipper_order_statistic" layoutX="26.0" layoutY="151.0" prefHeight="567.0" prefWidth="1175.0">
+<AnchorPane prefHeight="750.0" prefWidth="1301.0" stylesheets="@../../Styles/AdminStatistic.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Admin.AdminStatisticController">
+    <BarChart fx:id="statistic_chart" layoutX="26.0" layoutY="151.0" prefHeight="567.0" prefWidth="1076.0">
       <xAxis>
           <CategoryAxis prefHeight="32.0" prefWidth="1118.0" side="BOTTOM" />
       </xAxis>
@@ -27,8 +25,4 @@
         <Label fx:id="value_lbl" layoutX="15.0" layoutY="47.0" prefHeight="22.0" prefWidth="206.0" styleClass="label_" text="Value" />
       <Text layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text_" text="Quantity:" />
     </Pane>
-   <Button fx:id="reset_btn" layoutX="1037.0" layoutY="693.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="148.0" styleClass="reset_btn" text="Refresh Chart">
-      <graphic>
-         <FontAwesomeIconView glyphName="REFRESH" size="20" />
-      </graphic></Button>
 </AnchorPane>

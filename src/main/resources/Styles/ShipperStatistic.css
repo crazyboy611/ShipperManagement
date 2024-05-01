@@ -1,0 +1,30 @@
+.pane {
+    -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #ee2610ff 0.0%, #f7ad1dff 100.0%);
+    -fx-background-radius: 10;
+}
+.text_ {
+    -fx-fill: white;
+    -fx-font-size: 1.3em;
+    -fx-font-weight: bold;
+    -fx-font-family: Arial;
+}
+.label_ {
+    -fx-text-fill: white;
+    -fx-font-size: 1.7em;
+    -fx-font-weight: bold;
+    -fx-font-family: Arial;
+}
+.chart-bar {
+    -fx-bar-fill: #EB984E;
+}
+.reset_btn {
+    -fx-background-color: #0099FFFF ;
+    -fx-text-fill: white;
+    -fx-font-size: 1.3em;
+}
+.reset_btn FontAwesomeIconView {
+    -fx-fill: white;
+}
+Button {
+    -fx-cursor: hand;
+}

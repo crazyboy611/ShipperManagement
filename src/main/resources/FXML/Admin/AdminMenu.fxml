@@ -28,9 +28,17 @@
                     <FontAwesomeIconView glyphName="LIST" size="20" />
                 </graphic>
             <padding>
-               <Insets right="25.0" />
+               <Insets right="35.0" />
             </padding>
             </Button>
+         <Button fx:id="statistic_btn" mnemonicParsing="false" text="Statistic">
+            <graphic>
+               <FontAwesomeIconView glyphName="AREA_CHART" size="20" text="" />
+            </graphic>
+            <padding>
+               <Insets right="25.0" />
+            </padding>
+         </Button>
             <Button fx:id="logout_btn" mnemonicParsing="false" styleClass="logout_btn" text="Logout">
                 <graphic>
                     <FontAwesomeIconView glyphName="EXTERNAL_LINK" size="20" text="" />
