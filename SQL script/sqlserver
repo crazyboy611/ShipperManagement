@@ -1,0 +1,106 @@
+create table if not exists admins
+(
+    id       int auto_increment
+        primary key,
+    username varchar(20) not null,
+    password varchar(20) not null
+);
+
+create table if not exists shippers
+(
+    shipper_id     int auto_increment
+        primary key,
+    firstname      varchar(255) not null,
+    lastname       varchar(255) not null,
+    phone          varchar(20)  not null,
+    password       varchar(20)  not null,
+    birthDay       varchar(20)  not null,
+    email          varchar(255) not null,
+    address        varchar(255) null,
+    personal_image longblob     null
+);
+
+create table if not exists orders
+(
+    order_id             int auto_increment
+        primary key,
+    shipper_id           int            null,
+    pickup_location      varchar(255)   not null,
+    delivery_location    varchar(255)   not null,
+    value                decimal(10, 2) not null,
+    other_details        text           null,
+    delivery_date_expect varchar(20)    null,
+    constraint orders_ibfk_1
+        foreign key (shipper_id) references shippers (shipper_id)
+);
+
+create table if not exists delivery_note
+(
+    delivery_id     int auto_increment
+        primary key,
+    order_id        int                                null,
+    delivery_number int                                null,
+    delivery_status enum ('Delivered', 'Not Delivery') null,
+    delivery_date   varchar(20)                        null,
+    constraint delivery_note_ibfk_2
+        foreign key (order_id) references orders (order_id)
+);
+
+
+ SQL Server Code
+ -- Tạo bảng admins
+
+ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'admins') AND type in (N'U'))
+ BEGIN
+     CREATE TABLE admins (
+         id INT IDENTITY(1,1) PRIMARY KEY,
+         username VARCHAR(20) NOT NULL,
+         password VARCHAR(20) NOT NULL
+     );
+ END;
+
+ -- Tạo bảng shippers
+ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'shippers') AND type in (N'U'))
+ BEGIN
+     CREATE TABLE shippers (
+         shipper_id INT IDENTITY(1,1) PRIMARY KEY,
+         firstname VARCHAR(255) NOT NULL,
+         lastname VARCHAR(255) NOT NULL,
+         phone VARCHAR(20) NOT NULL,
+         password VARCHAR(20) NOT NULL,
+         birthDay VARCHAR(20) NOT NULL,
+         email VARCHAR(255) NOT NULL,
+         address VARCHAR(255) NULL,
+         personal_image VARBINARY(MAX) NULL
+     );
+ END;
+
+ -- Tạo bảng orders
+ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'orders') AND type in (N'U'))
+ BEGIN
+     CREATE TABLE orders (
+         order_id INT IDENTITY(1,1) PRIMARY KEY,
+         shipper_id INT NULL,
+         pickup_location VARCHAR(255) NOT NULL,
+         delivery_location VARCHAR(255) NOT NULL,
+         value DECIMAL(10, 2) NOT NULL,
+         other_details TEXT NULL,
+         delivery_date_expect VARCHAR(20) NULL,
+         CONSTRAINT FK_shipper_orders FOREIGN KEY (shipper_id) REFERENCES shippers(shipper_id)
+     );
+ END;
+
+ -- Tạo bảng delivery_note
+ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'delivery_note') AND type in (N'U'))
+ BEGIN
+     CREATE TABLE delivery_note (
+         delivery_id INT IDENTITY(1,1) PRIMARY KEY,
+         order_id INT NULL,
+         delivery_number INT NULL,
+         delivery_status VARCHAR(20) NULL, -- Nên sử dụng VARCHAR thay vì ENUM
+         delivery_date VARCHAR(20) NULL,
+         CONSTRAINT FK_order_delivery FOREIGN KEY (order_id) REFERENCES orders(order_id),
+ 		CONSTRAINT CHK_delivery_status
+         CHECK (delivery_status IN ('Delivered', 'Not Delivery'))
+     );
+ END;
