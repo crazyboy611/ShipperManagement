@@ -39,6 +39,14 @@
                <Insets right="25.0" />
             </padding>
          </Button>
+         <Button fx:id="order_note_btn" mnemonicParsing="false" text="Order Note">
+            <graphic>
+               <FontAwesomeIconView glyphName="STICKY_NOTE_ALT" size="20" />
+            </graphic>
+            <padding>
+               <Insets right="5.0" />
+            </padding>
+         </Button>
             <Button fx:id="logout_btn" mnemonicParsing="false" styleClass="logout_btn" text="Logout">
                 <graphic>
                     <FontAwesomeIconView glyphName="EXTERNAL_LINK" size="20" text="" />

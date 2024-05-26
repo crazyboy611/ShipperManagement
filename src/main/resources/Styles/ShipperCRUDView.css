@@ -43,12 +43,14 @@
 }
 .image_view ImageView{
     /*-fx-border-color: red;*/
-    -fx-border-radius: 8;
-    -fx-border-width: 2;
-    -fx-background-color: #ffffff;
-    -fx-alignment: center;
-    -fx-padding: 5 5 5 5 ;
-    -fx-spacing: 10;
+    /*-fx-border-radius: 8;*/
+    /*-fx-border-width: 2;*/
+    /*-fx-background-color: #ffffff;*/
+    /*-fx-alignment: center;*/
+    /*-fx-padding: 5 5 5 5 ;*/
+    /*-fx-spacing: 10;*/
+    -fx-pref-height: 240;
+    -fx-pref-width: 180;
 }
 .clear_btn {
     -fx-background-color: red;
@@ -91,4 +93,8 @@ Button:hover {
 .search_field {
     -fx-border-color:linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #ee2610ff 0.0%, #f7ad1dff 100.0%);
     -fx-border-radius: 5;
+}
+.image_container {
+    -fx-alignment: center;
+    -fx-spacing: 10;
 }

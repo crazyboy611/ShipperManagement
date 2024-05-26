@@ -40,4 +40,6 @@ Text {
 }
 .status_lbl {
     -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
 }

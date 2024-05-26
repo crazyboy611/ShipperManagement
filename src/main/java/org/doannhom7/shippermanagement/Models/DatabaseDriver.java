@@ -1,5 +1,6 @@
 package org.doannhom7.shippermanagement.Models;
 
+import javax.xml.transform.Result;
 import java.io.InputStream;
 import java.sql.*;
 
@@ -145,6 +146,22 @@ public class DatabaseDriver {
         }
         return resultSet;
     }
+    public ResultSet findShipperByOrderId(int order_id) {
+        PreparedStatement preparedStatement;
+        ResultSet resultSet = null;
+        String query = "SELECT s.shipper_id, s.firstname, s.lastname, s.phone "
+                + "FROM shippermanagement.shippers s "
+                + "join shippermanagement.orders o on s.shipper_id = o.shipper_id "
+                + "WHERE order_id = ?";
+        try{
+            preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement.setInt(1, order_id);
+            resultSet = preparedStatement.executeQuery();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
     public void updateOrder(int id, int shipper_id, String pickup_location, String delivery_location, Double value, String other_details, String delivery_date_expect) {
         PreparedStatement preparedStatement;
         String query = "UPDATE shippermanagement.orders SET shipper_id=?, pickup_location=?, delivery_location=?, value=?, other_details=?, delivery_date_expect=? WHERE order_id=?";
@@ -211,7 +228,7 @@ public class DatabaseDriver {
             e.printStackTrace();
         }
     }
-    public ResultSet getOrderNote(int id) {
+    public ResultSet getOrderNoteById(int id) {
         PreparedStatement preparedStatement;
         ResultSet resultSet = null;
         String query = "SELECT * FROM shippermanagement.delivery_note WHERE order_id=?";
@@ -251,6 +268,18 @@ public class DatabaseDriver {
         }catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public ResultSet getDeliveryNote() {
+        PreparedStatement preparedStatement;
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM shippermanagement.delivery_note";
+        try {
+            preparedStatement = this.connection.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
     }
     public ResultSet findOrderById(int order_id) {
         PreparedStatement preparedStatement;

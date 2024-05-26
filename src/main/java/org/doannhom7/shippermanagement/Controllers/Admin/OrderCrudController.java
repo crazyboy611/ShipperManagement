@@ -19,6 +19,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.StringConverter;
 import org.doannhom7.shippermanagement.Models.Model;
 import org.doannhom7.shippermanagement.Models.Order;
 import org.doannhom7.shippermanagement.Models.Shipper;
@@ -27,6 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class OrderCrudController implements Initializable {
@@ -84,6 +86,7 @@ public class OrderCrudController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initTable();
+        datePickerFormat();
         setCreateFlag(true);
         setEditFlag(false);
         setDeleteFlag(true);
@@ -199,7 +202,7 @@ public class OrderCrudController implements Initializable {
                     }
                     viewNote.setOnAction(actionEvent -> {
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML/Admin/OrderNoteView.fxml"));
-                        ResultSet resultSet = Model.getInstance().getDatabaseDriver().getOrderNote(getTableRow().getItem().orderIdProperty().get());
+                        ResultSet resultSet = Model.getInstance().getDatabaseDriver().getOrderNoteById(getTableRow().getItem().orderIdProperty().get());
                         ResultSet resultSet1 = Model.getInstance().getDatabaseDriver().findOrderById(getTableRow().getItem().orderIdProperty().get());
                         OrderNoteController orderNoteController = new OrderNoteController(resultSet, resultSet1);
                         fxmlLoader.setController(orderNoteController);
@@ -359,5 +362,23 @@ public class OrderCrudController implements Initializable {
         last_name_lbl.setText("");
         pNumber_lbl.setText("");
         initTable();
+    }
+    private void datePickerFormat() {
+        date_picker.setConverter(
+                new StringConverter<>() {
+                    final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                    @Override
+                    public String toString(LocalDate date) {
+                        return (date != null) ? dateFormatter.format(date) : "";
+                    }
+
+                    @Override
+                    public LocalDate fromString(String string) {
+                        return (string != null && !string.isEmpty())
+                                ? LocalDate.parse(string, dateFormatter)
+                                : null;
+                    }
+                });
     }
 }

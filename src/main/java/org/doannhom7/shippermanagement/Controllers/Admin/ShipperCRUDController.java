@@ -21,10 +21,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.StringConverter;
 import org.controlsfx.control.textfield.TextFields;
 import org.doannhom7.shippermanagement.Models.Model;
 import org.doannhom7.shippermanagement.Models.Shipper;
@@ -35,11 +37,11 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 public class ShipperCRUDController implements Initializable {
@@ -102,6 +104,7 @@ public class ShipperCRUDController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initTable();
+        datePickerFormat();
         setCreateFlag(true);
         setEditFlag(false);
         setDeleteFlag(true);
@@ -232,8 +235,6 @@ public class ShipperCRUDController implements Initializable {
 
             ;
         };
-        personal_image_view.setFitWidth(250);
-        personal_image_view.setFitHeight(300);
         btn_col.setCellFactory(cellFactory);
         shipper_table_view.setItems(shippers);
 
@@ -313,27 +314,9 @@ public class ShipperCRUDController implements Initializable {
             String email = email_fd.getText();
             String address = address_fd.getText();
             InputStream inputStream = imageToInputStream(personal_image_view.getImage());
-//            boolean exist = false;
-//            for(Shipper shipper : shippers) {
-//                if(phone.equals(shipper.phoneProperty().get())) {
-//                    phone_exist_error_lbl.setText("This Phone has already exist!");
-//                    phone_exist_error_lbl.setStyle("-fx-text-fill: red;");
-//                    exist = true;
-//                }
-//            }
-//        boolean finalExist = exist;
-//        phone_fd.textProperty().addListener((observableValue, oldVal, newVal) -> {
-//                    if(newVal.equals(oldVal)) {
-                        Model.getInstance().getDatabaseDriver().updateShipperData(id, fName, lName,birth, phone, email, address, password, inputStream);
-                        setEmpty();
-                        initTable();
-//                    }
-//                    if(!finalExist) {
-//                        Model.getInstance().getDatabaseDriver().updateShipperData(id, fName, lName,birth, phone, email, address, password, inputStream);
-//                        setEmpty();
-//                        initTable();
-//                    }
-//            });
+            Model.getInstance().getDatabaseDriver().updateShipperData(id, fName, lName,birth, phone, email, address, password, inputStream);
+            setEmpty();
+            initTable();
         }
     private void createShipper() {
         if(getEditFlag()){
@@ -397,6 +380,20 @@ public class ShipperCRUDController implements Initializable {
                 FileInputStream fileInputStream = new FileInputStream(file);
                 Image image = new Image(fileInputStream, personal_image_view.getFitWidth(), personal_image_view.getFitHeight(), true, true);
                 personal_image_view.setImage(image);
+                double width = 180;
+                double height = 240;
+
+                personal_image_view.setFitWidth(width);
+                personal_image_view.setFitHeight(height);
+                personal_image_view.setPreserveRatio(false);
+
+                javafx.scene.shape.Rectangle clip = new Rectangle(width, height);
+                clip.setArcWidth(30);
+                clip.setArcHeight(30);
+
+                personal_image_view.setClip(clip);
+
+                personal_image_view.setClip(clip);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -409,6 +406,18 @@ public class ShipperCRUDController implements Initializable {
             if(inputStream != null){
                 Image image = new Image(inputStream, personal_image_view.getFitWidth(), personal_image_view.getFitHeight(), true, true);
                 personal_image_view.setImage(image);
+                double width = 180;
+                double height = 240;
+
+                personal_image_view.setFitWidth(width);
+                personal_image_view.setFitHeight(height);
+                personal_image_view.setPreserveRatio(false);
+
+                javafx.scene.shape.Rectangle clip = new Rectangle(width, height);
+                clip.setArcWidth(30);
+                clip.setArcHeight(30);
+
+                personal_image_view.setClip(clip);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -434,5 +443,22 @@ public class ShipperCRUDController implements Initializable {
             e.printStackTrace();
             return null;
         }
+    }
+    private void datePickerFormat() {
+        date_picker.setConverter(
+                new StringConverter<>() {
+                    final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    @Override
+                    public String toString(LocalDate date) {
+                        return (date != null) ? dateFormatter.format(date) : "";
+
+                    }
+                    @Override
+                    public LocalDate fromString(String string) {
+                        return (string != null && !string.isEmpty())
+                                ? LocalDate.parse(string, dateFormatter)
+                                : null;
+                    }
+                });
     }
 }

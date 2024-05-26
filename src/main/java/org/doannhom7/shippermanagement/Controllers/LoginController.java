@@ -47,7 +47,7 @@ public class LoginController implements Initializable {
             }else{
                 shipper_phone_field.setText("");
                 password_field.setText("");
-                error_label.setText("No Such Login Credentials");
+                error_label.setText("Error: Invalid phone number or password! ");
             }
         }
         else{

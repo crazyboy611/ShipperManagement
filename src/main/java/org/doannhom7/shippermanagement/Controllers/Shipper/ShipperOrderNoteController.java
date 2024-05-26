@@ -27,7 +27,6 @@ public class ShipperOrderNoteController implements Initializable {
     public ShipperOrderNoteController(ResultSet deliveryNote, ResultSet order) {
         this.deliveryNote = deliveryNote;
         this.order = order;
-
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -39,20 +38,20 @@ public class ShipperOrderNoteController implements Initializable {
                 String notDelivery = not_delivery.textProperty().get();
                 int num = Integer.parseInt(number_of_deliveries.getText());
                 num++;
-                if(num >= 3) {
-                    Model.getInstance().getDatabaseDriver().deleteDeliveryNote(orderId);
-                }else{
+                if(num == 3) {
                     Model.getInstance().getDatabaseDriver().updateOrderNote(num, notDelivery, "", orderId);
+                    confirm_btn.setDisable(true);
+                    delivered.setDisable(true);
+                    not_delivery.setDisable(true);
                 }
             }
             if(delivered.isSelected()) {
-                String delivery = delivered.textProperty().get();
                 int num = Integer.parseInt(number_of_deliveries.getText());
                 if(num == 0) {
                     num++;
                 }
-                Model.getInstance().getDatabaseDriver().updateOrderNote(num, delivery, deliveryDate, orderId);
-                status_lbl.setText("Delivered on " + LocalDate.now());
+                Model.getInstance().getDatabaseDriver().updateOrderNote(num, "Delivered, wait Admin confirm!", deliveryDate, orderId);
+                status_lbl.setText("Delivered, wait Admin confirm! " +'\n'+ LocalDate.now());
                 status_lbl.setStyle("-fx-background-color: #5BBD2BFF; -fx-text-fill: white; -fx-background-radius: 10;");
             }
             confirm_btn.setDisable(true);
@@ -83,9 +82,25 @@ public class ShipperOrderNoteController implements Initializable {
                     delivered.setDisable(true);
                     not_delivery.setDisable(true);
                     confirm_btn.setDisable(true);
-                }else{
+                }else if(status.equals("Not Delivery") && numOfDeli < 3){
                     status_lbl.setText("Not Delivery");
                     status_lbl.setStyle("-fx-background-color: #E33539FF; -fx-text-fill: white; -fx-background-radius: 10;");
+                }else if(numOfDeli == 3){
+                    status_lbl.setStyle("-fx-background-color: #E33539FF; -fx-text-fill: white; -fx-background-radius: 10; -fx-wrap-text: true; -fx-pref-height: 70;");
+                    status_lbl.layoutYProperty().set(130);
+                    status_lbl.setText("""
+                            Not Delivered
+                            You have failed to deliver the order
+                            more than 3 times""");
+                    delivered.setDisable(true);
+                    not_delivery.setDisable(true);
+                    confirm_btn.setDisable(true);
+                }else if(status.equals("Delivered, wait Admin confirm!")) {
+                    status_lbl.setText("Delivered, wait Admin confirm!");
+                    status_lbl.setStyle("-fx-background-color: #F7AD1DFF; -fx-text-fill: white; -fx-background-radius: 10;");
+                    delivered.setDisable(true);
+                    not_delivery.setDisable(true);
+                    confirm_btn.setVisible(false);
                 }
             }
         }catch (Exception e) {

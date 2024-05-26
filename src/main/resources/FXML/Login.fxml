@@ -30,6 +30,6 @@
         <Label text="Password:" />
         <PasswordField fx:id="password_field" styleClass="input_field" />
         <Button fx:id="login_btn" mnemonicParsing="false" text="Login" />
-        <Label fx:id="error_label" styleClass="error_lbl" text="Error:" />
+        <Label fx:id="error_label" styleClass="error_lbl" />
     </VBox>
 </AnchorPane>

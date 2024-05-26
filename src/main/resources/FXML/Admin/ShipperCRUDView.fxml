@@ -66,7 +66,6 @@
       <Button fx:id="edit_btn" mnemonicParsing="false" styleClass="edit_btn" text="Edit" />
       <Button fx:id="delete_btn" mnemonicParsing="false" prefWidth="87.0" styleClass="delete_btn" text="Delete" />
    </VBox>
-   <ImageView fx:id="personal_image_view" fitHeight="280.0" fitWidth="197.0" layoutX="231.0" layoutY="454.0" pickOnBounds="true" preserveRatio="true" styleClass="image_view" />
    <Button fx:id="clear_btn" layoutX="870.0" layoutY="752.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" styleClass="clear_btn" text="Clear" textFill="WHITE">
       <font>
          <Font size="14.0" />
@@ -75,14 +74,7 @@
          <FontAwesomeIconView glyphName="REFRESH" size="15" />
       </graphic>
    </Button>
-   <Button fx:id="upload_image_btn" layoutX="279.0" layoutY="703.0" mnemonicParsing="false" styleClass="upload_btn" text="Upload Image" AnchorPane.bottomAnchor="22.0">
-      <graphic>
-         <FontAwesomeIconView glyphName="UPLOAD" />
-      </graphic>
-   </Button>
-   <Text layoutX="289.0" layoutY="802.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal Image" />
    <Label fx:id="error_lbl" layoutX="550.0" layoutY="822.0" prefHeight="17.0" prefWidth="250.0" textFill="RED" />
-   <Text fill="RED" layoutX="297.0" layoutY="784.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*REQUIRED*" />
    <TextField fx:id="search_field" layoutX="157.0" layoutY="33.0" prefHeight="30.0" prefWidth="281.0" promptText="Search" styleClass="search_field" />
    <Text layoutX="69.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find Shipper:" wrappingWidth="81.357421875">
       <font>
@@ -91,4 +83,16 @@
    </Text>
    <Label fx:id="shipper_id" layoutX="551.0" layoutY="446.0" />
    <Label fx:id="phone_exist_error_lbl" layoutX="550.0" layoutY="805.0" prefHeight="17.0" prefWidth="250.0" />
+   <VBox layoutX="216.0" layoutY="506.0" prefHeight="308.0" prefWidth="234.0" styleClass="image_container">
+      <children>
+         <ImageView fx:id="personal_image_view" fitHeight="240.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="image_view" />
+         <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*REQUIRED*" />
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Personal Image" />
+         <Button fx:id="upload_image_btn" mnemonicParsing="false" styleClass="upload_btn" text="Upload Image">
+            <graphic>
+               <FontAwesomeIconView glyphName="UPLOAD" />
+            </graphic>
+         </Button>
+      </children>
+   </VBox>
 </AnchorPane>

@@ -14,8 +14,8 @@ public class AdminMenuController implements Initializable {
     public Button all_shippers_btn;
     public Button all_orders_btn;
     public Button logout_btn;
-    public Button find_btn;
     public Button statistic_btn;
+    public Button order_note_btn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -23,6 +23,7 @@ public class AdminMenuController implements Initializable {
         all_orders_btn.setOnAction(actionEvent -> onAllOrderCrud());
         statistic_btn.setOnAction(actionEvent -> onStatisticView());
         logout_btn.setOnAction(actionEvent -> onLogout());
+        order_note_btn.setOnAction(actionEvent -> onOrderNote());
     }
     private void onAllShipperCrud() {
         Model.getInstance().getViewFactory().getAdminSelectedMenu().set(AdminMenuOptions.ALL_SHIPPERS_CRUD);
@@ -32,6 +33,9 @@ public class AdminMenuController implements Initializable {
     }
     private void onStatisticView() {
         Model.getInstance().getViewFactory().getAdminSelectedMenu().set(AdminMenuOptions.STATISTICS);
+    }
+    private void onOrderNote() {
+        Model.getInstance().getViewFactory().getAdminSelectedMenu().set(AdminMenuOptions.ORDER_NOTE);
     }
     private void onLogout() {
         Stage stage = (Stage) all_orders_btn.getScene().getWindow();

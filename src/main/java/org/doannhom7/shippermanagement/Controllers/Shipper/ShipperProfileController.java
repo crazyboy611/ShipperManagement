@@ -4,6 +4,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 import org.doannhom7.shippermanagement.Models.Model;
 import org.doannhom7.shippermanagement.Models.Shipper;
 import org.doannhom7.shippermanagement.Views.ShipperMenuOptions;
@@ -43,7 +44,21 @@ public class ShipperProfileController implements Initializable {
         address_lbl.textProperty().bind(Model.getInstance().getShipper().addressProperty());
 
         InputStream inputStream = Model.getInstance().getDatabaseDriver().getPersonalImage(shipper.shipperIdProperty().get());
+        Image image = new Image(inputStream);
 
-        shipper_image.setImage(new Image(inputStream));
+        shipper_image.setImage(image);
+
+        double width = 225;
+        double height = 301;
+
+        shipper_image.setFitWidth(width);
+        shipper_image.setFitHeight(height);
+        shipper_image.setPreserveRatio(false);
+
+        Rectangle clip = new Rectangle(width, height);
+        clip.setArcWidth(30);
+        clip.setArcHeight(30);
+
+        shipper_image.setClip(clip);
     }
 }

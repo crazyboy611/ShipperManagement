@@ -91,10 +91,10 @@ public class OrdersTableViewController implements Initializable {
                     viewNote.setStyle("-fx-background-color:#0099CCFF; -fx-text-fill: white; -fx-cursor: hand;");
                     viewNote.setOnAction(actionEvent -> {
                         int id = getTableRow().getItem().orderIdProperty().get();
-                        ResultSet resultSet = Model.getInstance().getDatabaseDriver().getOrderNote(id);
+                        ResultSet resultSet = Model.getInstance().getDatabaseDriver().getOrderNoteById(id);
                         ResultSet resultSet1 = Model.getInstance().getDatabaseDriver().findOrderById(id);
                         ShipperOrderNoteController shipperOrderNoteController = new ShipperOrderNoteController(resultSet, resultSet1);
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML/Shipper/ShipperOrderNoteView.fxml"));
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML/Shipper/ShipperOrderNote.fxml"));
                         fxmlLoader.setController(shipperOrderNoteController);
                         Stage stage = new Stage();
                         Scene scene;

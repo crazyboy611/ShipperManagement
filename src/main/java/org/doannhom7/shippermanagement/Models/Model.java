@@ -1,9 +1,12 @@
 package org.doannhom7.shippermanagement.Models;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.doannhom7.shippermanagement.Views.ViewFactory;
 
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Model {
     private final ViewFactory viewFactory;
@@ -14,8 +17,10 @@ public class Model {
     private final Shipper shipper;
     private boolean shipperLoginSuccessFlag;
 
+    //Admin data section
     private final Admin admin;
     private boolean adminLoginSuccessFlag;
+    private final ObservableList<DeliveryNote> deliveryNotes;
     private Model() {
         this.viewFactory = new ViewFactory();
         this.databaseDriver = new DatabaseDriver();
@@ -23,6 +28,7 @@ public class Model {
         this.adminLoginSuccessFlag = false;
         this.shipper = new Shipper(0,"","",null,"", "", "", "");
         this.admin = new Admin("");
+        this.deliveryNotes = FXCollections.observableArrayList();
     }
 
     public boolean getShipperLoginSuccessFlag() {
@@ -88,6 +94,31 @@ public class Model {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+    public void setDeliveryNotes() {
+        ResultSet resultSet = databaseDriver.getDeliveryNote();
+        try {
+            while(resultSet.next()) {
+                int note_id = resultSet.getInt("delivery_id");
+                int order_id = resultSet.getInt("order_id");
+                int number = resultSet.getInt("delivery_number");
+                String status = resultSet.getString("delivery_status");
+                LocalDate localDate;
+                if(resultSet.getString("delivery_date").isEmpty()) {
+                    localDate = null;
+                }else{
+                    String[] date = resultSet.getString("delivery_date").split("-");
+                    localDate = LocalDate.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
+                }
+
+                this.deliveryNotes.add(new DeliveryNote(note_id, order_id, number, status, localDate));
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public ObservableList<DeliveryNote> getDeliveryNotes() {
+        return this.deliveryNotes;
     }
 
 }

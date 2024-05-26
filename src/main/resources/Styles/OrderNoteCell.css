@@ -1,0 +1,23 @@
+.hBox {
+    -fx-padding: 0 0 0 10;
+    -fx-spacing: 70;
+    -fx-alignment: center;
+}
+.check_btn {
+    -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #ee2610ff 0.0%, #f7ad1dff 100.0%);
+    -fx-text-fill: white;
+}
+.check_btn FontAwesomeIconView {
+    -fx-fill: white;
+}
+.cell {
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 7);
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+}
+Button {
+    -fx-cursor: hand;
+}
+Label {
+    -fx-font-weight: bold;
+}

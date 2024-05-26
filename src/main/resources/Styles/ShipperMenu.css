@@ -43,6 +43,11 @@
 }
 .menu_container Button:hover {
     -fx-cursor: hand;
+    -fx-background-color: #F7AD1DFF;
+    -fx-text-fill: white;
+}
+.menu_container Button:hover FontAwesomeIconView {
+    -fx-fill: white;
 }
 .alt_btn {
     -fx-background-color: #F7AD1DFF;

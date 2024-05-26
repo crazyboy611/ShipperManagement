@@ -22,6 +22,7 @@ public class ViewFactory {
     private AnchorPane allShipperCrudView;
     private AnchorPane allOrdersCrudView;
     private AnchorPane adminStatistic;
+    private AnchorPane adminOrderNote;
     private final ObjectProperty<AdminMenuOptions> adminSelectedMenu;
 
 
@@ -126,6 +127,17 @@ public class ViewFactory {
             }
         }
         return adminStatistic;
+    }
+
+    public AnchorPane getAdminOrderNoteView() {
+        if(adminOrderNote == null) {
+            try {
+                adminOrderNote = new FXMLLoader(getClass().getResource("/FXML/Admin/OrderNoteListView.fxml")).load();
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return adminOrderNote;
     }
 
     private void creatStage(FXMLLoader loader) {

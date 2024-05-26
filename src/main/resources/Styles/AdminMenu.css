@@ -37,7 +37,12 @@
 }
 .menu_navigation Button:hover {
     -fx-cursor: hand;
+    -fx-background-color: #F7AD1DFF;
+    -fx-text-fill: white;
 }
+.menu_navigation Button:hover FontAwesomeIconView {
+     -fx-fill: white;
+ }
 .menu_navigation FontAwesomeIconView{
     -fx-fill: #F7AD1DFF;
 

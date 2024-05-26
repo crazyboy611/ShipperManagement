@@ -1,0 +1,18 @@
+.container {
+    -fx-background-color: #EEEEEE;
+}
+.container .list-cell {
+    -fx-background-color: #EEEEEE;
+    -fx-padding: 10 0 10 0;
+}
+.container .list-view {
+    -fx-background-color: #EEEEEE;
+    -fx-padding: 10 0 10 0;
+}
+.scroll-bar:vertical .thumb {
+    -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #ee2610ff 0.0%, #f7ad1dff 100.0%);
+}
+.title {
+    -fx-font-size: 2em;
+    -fx-text-fill: #888888;
+}
