@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="865.0" prefWidth="1171.0" styleClass="container" stylesheets="@../../Styles/OrderNoteListVIew.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Admin.OrderNoteListViewController">
-    <ListView fx:id="order_note_list_view" layoutX="47.0" layoutY="59.0" prefHeight="747.0" prefWidth="1077.0" styleClass="container">
+    <ListView fx:id="order_note_list_view" layoutX="47.0" layoutY="59.0" prefHeight="710.0" prefWidth="1077.0" styleClass="container">
       <padding>
          <Insets right="30.0" />
       </padding></ListView>
    <Text layoutX="47.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Delivery Note List" wrappingWidth="213.13671875" />
+    <Button fx:id="reset_btn" layoutX="976.0" layoutY="793.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="148.0" styleClass="reset_btn" text="Refresh List">
+        <graphic>
+            <FontAwesomeIconView glyphName="REFRESH" size="20" />
+        </graphic></Button>
 </AnchorPane>

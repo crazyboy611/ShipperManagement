@@ -16,3 +16,14 @@
     -fx-font-size: 2em;
     -fx-text-fill: #888888;
 }
+.reset_btn {
+    -fx-background-color: #0099FFFF ;
+    -fx-text-fill: white;
+    -fx-font-size: 1.3em;
+}
+.reset_btn FontAwesomeIconView {
+    -fx-fill: white;
+}
+Button {
+    -fx-cursor: hand;
+}

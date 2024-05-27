@@ -2,12 +2,11 @@ package org.doannhom7.shippermanagement.Controllers.Admin;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.stage.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.doannhom7.shippermanagement.Models.Model;
 
 import java.net.URL;
@@ -47,7 +46,6 @@ public class AdminOrderConfirmController implements Initializable {
         this.deliveryNotes = deliveryNotes;
         this.orders = orders;
         this.shipper = shipper;
-
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -70,7 +68,6 @@ public class AdminOrderConfirmController implements Initializable {
                     confirm_btn.setDisable(true);
                     status_lbl.setText("Not Delivery");
                     status_lbl.setStyle("-fx-background-color: #E33539FF; -fx-text-fill: white; -fx-background-radius: 10;");
-                    refreshList();
                 }
                 if (delivered.isSelected()) {
                     String delivery = delivered.textProperty().get();
@@ -249,18 +246,5 @@ public class AdminOrderConfirmController implements Initializable {
             confirm_btn.setDisable(false);
             error_lbl.setVisible(false);
         });
-    }
-    private void refreshList() {
-        // Get the controller for the OrderNoteListViewController
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Admin/OrderNoteListView.fxml"));
-        try{
-            Parent root = loader.load();
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        OrderNoteListViewController controller = loader.getController();
-
-        // Call initData() to update the list view
-        controller.initData();
     }
 }
