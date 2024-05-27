@@ -1,3 +1,5 @@
+create database shippermanagement;
+
 create table if not exists admins
 (
     id       int auto_increment
@@ -40,7 +42,7 @@ create table if not exists delivery_note
         primary key,
     order_id        int                                null,
     delivery_number int                                null,
-    delivery_status enum ('Delivered', 'Not Delivery') null,
+    delivery_status enum ('Delivered', 'Not Delivery', 'Delivered, wait Admin confirm!') null,
     delivery_date   varchar(20)                        null,
     constraint delivery_note_ibfk_2
         foreign key (order_id) references orders (order_id)
