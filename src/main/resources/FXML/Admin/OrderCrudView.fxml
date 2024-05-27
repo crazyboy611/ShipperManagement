@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="865.0" prefWidth="1171.0" styleClass="view_container" stylesheets="@../../Styles/OrderCrudView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Admin.OrderCrudController">
+<AnchorPane prefHeight="865.0" prefWidth="1171.0" styleClass="view_container" stylesheets="@../../Styles/OrderCrudView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Admin.OrderCRUDController">
    <TableView fx:id="order_table_view" layoutX="29.0" layoutY="106.0" prefHeight="373.0" prefWidth="1113.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="106.0">
       <columns>
          <TableColumn fx:id="order_id_col" prefWidth="82.0" text="Order ID" />

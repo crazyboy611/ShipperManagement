@@ -40,10 +40,16 @@ public class ShipperOrderNoteController implements Initializable {
                 num++;
                 if(num == 3) {
                     Model.getInstance().getDatabaseDriver().updateOrderNote(num, notDelivery, "", orderId);
+                    number_of_deliveries.setText(String.valueOf(num));
                     confirm_btn.setDisable(true);
                     delivered.setDisable(true);
                     not_delivery.setDisable(true);
                 }
+                Model.getInstance().getDatabaseDriver().updateOrderNote(num, notDelivery, "", orderId);
+                number_of_deliveries.setText(String.valueOf(num));
+                confirm_btn.setDisable(true);
+                delivered.setDisable(true);
+                not_delivery.setDisable(true);
             }
             if(delivered.isSelected()) {
                 int num = Integer.parseInt(number_of_deliveries.getText());
@@ -51,6 +57,7 @@ public class ShipperOrderNoteController implements Initializable {
                     num++;
                 }
                 Model.getInstance().getDatabaseDriver().updateOrderNote(num, "Delivered, wait Admin confirm!", deliveryDate, orderId);
+                number_of_deliveries.setText(String.valueOf(num));
                 status_lbl.setText("Delivered, wait Admin confirm! " +'\n'+ LocalDate.now());
                 status_lbl.setStyle("-fx-background-color: #5BBD2BFF; -fx-text-fill: white; -fx-background-radius: 10;");
             }

@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.doannhom7.shippermanagement.Controllers.Shipper.ShipperOrderNoteController;
 import org.doannhom7.shippermanagement.Models.DeliveryNote;
 import org.doannhom7.shippermanagement.Models.Model;
@@ -62,6 +63,7 @@ public class OrderListCellController implements Initializable {
          }
          stage.setScene(scene);
          stage.initModality(Modality.APPLICATION_MODAL);
+         stage.initStyle(StageStyle.UNDECORATED);
          stage.setResizable(false);
          stage.setTitle("Delivery Note");
          stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icons8-shipper-64.png"))));

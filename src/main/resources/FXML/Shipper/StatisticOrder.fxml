@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="750.0" prefWidth="1229.0" stylesheets="@../../Styles/ShipperStatistic.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.doannhom7.shippermanagement.Controllers.Shipper.ShipperStatistic">
-    <BarChart fx:id="shipper_order_statistic" layoutX="26.0" layoutY="151.0" prefHeight="567.0" prefWidth="1175.0">
+    <BarChart fx:id="shipper_order_statistic" animated="false" layoutX="26.0" layoutY="151.0" prefHeight="567.0" prefWidth="1175.0">
       <xAxis>
           <CategoryAxis prefHeight="32.0" prefWidth="1118.0" side="BOTTOM" />
       </xAxis>
@@ -25,7 +25,7 @@
     </Pane>
     <Pane layoutX="380.0" layoutY="24.0" prefHeight="94.0" prefWidth="266.0" styleClass="pane">
         <Label fx:id="value_lbl" layoutX="15.0" layoutY="47.0" prefHeight="22.0" prefWidth="206.0" styleClass="label_" text="Value" />
-      <Text layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text_" text="Quantity:" />
+      <Text layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text_" text="Total money:" />
     </Pane>
    <Button fx:id="reset_btn" layoutX="1037.0" layoutY="693.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="148.0" styleClass="reset_btn" text="Refresh Chart">
       <graphic>

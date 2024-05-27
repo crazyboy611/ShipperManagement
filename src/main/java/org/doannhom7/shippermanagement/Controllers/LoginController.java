@@ -31,10 +31,10 @@ public class LoginController implements Initializable {
 
     private void setAcc_selector() {
         Model.getInstance().getViewFactory().setAccountType(acc_selector.getValue());
-        if(acc_selector.getValue() == AccountType.SHIPPER) {
-            shipper_phone.setText("Phone: ");
-        }else{
+        if(acc_selector.getValue() == AccountType.ADMIN) {
             shipper_phone.setText("Username: ");
+        }else{
+            shipper_phone.setText("Phone: ");
         }
     }
     private void onLogin() {

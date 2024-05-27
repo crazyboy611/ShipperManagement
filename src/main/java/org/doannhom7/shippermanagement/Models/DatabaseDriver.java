@@ -330,18 +330,19 @@ public class DatabaseDriver {
         }
         return resultSet;
     }
-    public ResultSet getAdminOrderStatistic() {
+    public ResultSet getAdminOrderStatistic(String year) {
         PreparedStatement preparedStatement;
         ResultSet resultSet = null;
         String query = "SELECT LEFT(delivery_date, 7) AS YearMonth, sum(value), COUNT(o.order_id) " +
                 "FROM shippermanagement.delivery_note " +
                 "RIGHT JOIN shippermanagement.orders o on delivery_note.order_id = o.order_id " +
-                "WHERE delivery_status = 'Delivered' " +
+                "WHERE delivery_status = 'Delivered' AND YEAR(delivery_date) = ? " +
                 "GROUP BY YearMonth " +
                 "ORDER BY YearMonth " +
                 "LIMIT 8";
         try {
             preparedStatement = this.connection.prepareStatement(query);
+            preparedStatement.setString(1, year);
             resultSet = preparedStatement.executeQuery();
         }catch (SQLException e ) {
             e.printStackTrace();

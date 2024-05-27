@@ -2,15 +2,15 @@ package org.doannhom7.shippermanagement.Controllers.Admin;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
+import javafx.stage.*;
 import org.doannhom7.shippermanagement.Models.Model;
 
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.Optional;
@@ -142,8 +142,12 @@ public class AdminOrderConfirmController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Alert");
                     alert.setHeaderText("Please give the order to another delivery person");
+                    alert.getButtonTypes().setAll(ButtonType.OK);
+                    Window window = alert.getDialogPane().getScene().getWindow();
+                    Stage stage = (Stage) window;
+                    stage.initModality(Modality.APPLICATION_MODAL);
                     Optional<ButtonType> buttonType = alert.showAndWait();
-                    if(buttonType.get() == ButtonType.OK) {
+                    if(buttonType.isPresent()) {
                         status_lbl.setText("Not Delivery");
                         status_lbl.setStyle("-fx-background-color: #E33539FF; -fx-text-fill: white; -fx-background-radius: 10;");
                         confirm_btn.setDisable(false);

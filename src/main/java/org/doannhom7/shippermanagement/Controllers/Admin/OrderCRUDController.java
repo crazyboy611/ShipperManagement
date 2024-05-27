@@ -18,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.doannhom7.shippermanagement.Models.Model;
@@ -31,7 +32,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-public class OrderCrudController implements Initializable {
+public class OrderCRUDController implements Initializable {
     public TableView<Order> order_table_view;
     public TableColumn<Order, Integer> order_id_col;
     public TableColumn<Shipper, Integer> shipper_id_col;
@@ -219,7 +220,6 @@ public class OrderCrudController implements Initializable {
                         stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icons8-shipper-64.png"))));
                         stage.show();
                     });
-//                    viewNote.setTranslateX();
                     HBox buttonsContainer = new HBox(viewShipper, viewNote);
                     buttonsContainer.setAlignment(Pos.CENTER);
                     buttonsContainer.setSpacing(10);
